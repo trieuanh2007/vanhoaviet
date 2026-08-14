@@ -1,0 +1,2654 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Website Quảng Bá Thủ Công Mỹ Nghệ - Văn Hoá Việt Nam. Kết nối nghệ thuật truyền thống với thế giới hiện đại.">
+    <meta name="theme-color" content="#1A1A1A">
+    <title>Thủ Công Mỹ Nghệ Việt Nam | Vietnamese Artisan Crafts</title>
+
+    <!-- Windows Phone 8 Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Phosphor Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.0.3/src/regular/style.css">
+
+    <style>
+        /* ============================================
+           VIETNAMESE METRO UI - Color Palette
+           ============================================ */
+
+        :root {
+            /* Vietnamese Signature Colors */
+            --vn-red: #B8383B;           /* Đỏ son - sơn mài truyền thống */
+            --vn-red-dark: #9A2F32;       /* Đỏ son đậm */
+            --vn-red-light: #D45658;      /* Đỏ son nhạt */
+            --vn-gold: #C9A962;           /* Vàng kim - hoa văn cao cấp */
+            --vn-gold-light: #E5D4A1;     /* Vàng kim nhạt */
+            --vn-gold-dark: #A68B4B;      /* Vàng kim đậm */
+
+            /* Metro Dark */
+            --metro-dark: #1A1A1A;        /* Nền tảng hiện đại */
+            --metro-surface: #252525;      /* Surface dark */
+            --metro-surface-light: #2F2F2F;
+            --metro-border: #3A3A3A;
+
+            /* Text Colors */
+            --text-primary: #FFFFFF;
+            --text-secondary: #B0B0B0;
+            --text-muted: #707070;
+
+            /* Typography */
+            --font-metro: 'Segoe UI', 'Noto Sans', system-ui, sans-serif;
+            --font-light: 200;
+            --font-semilight: 300;
+            --font-regular: 400;
+            --font-semibold: 600;
+            --font-bold: 700;
+
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+
+            /* WP8 Tile Sizes */
+            --tile-small: 150px;
+            --tile-medium-w: 320px;
+            --tile-medium-h: 150px;
+            --tile-large: 320px;
+
+            /* Transitions */
+            --transition-bounce: 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --transition-smooth: 0.3s ease;
+            --transition-fast: 0.15s ease;
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: var(--font-metro);
+            font-size: 17px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background: var(--metro-dark);
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* ============================================
+           VIETNAMESE METRO ANIMATIONS
+           ============================================ */
+
+        /* Bouncy Tile Effect */
+        @keyframes tile-bounce {
+            0% { transform: scale(1); }
+            20% { transform: scale(0.92); }
+            50% { transform: scale(1.06); }
+            75% { transform: scale(0.98); }
+            100% { transform: scale(1); }
+        }
+
+        /* Live Tile Pulse */
+        @keyframes live-pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Fade Slide Up */
+        @keyframes fade-slide-up {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* App Bar Slide */
+        @keyframes appbar-slide-up {
+            from { transform: translateY(100%); }
+            to { transform: translateY(0); }
+        }
+
+        /* Gold Shimmer */
+        @keyframes gold-shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
+        /* Red Glow */
+        @keyframes red-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(184, 56, 59, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(184, 56, 59, 0.5); }
+        }
+
+        /* ============================================
+           HEADER - Metro Style
+           ============================================ */
+        .vn-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: linear-gradient(180deg, var(--metro-dark) 0%, rgba(26,26,26,0.98) 100%);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 var(--space-lg);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(184, 56, 59, 0.3);
+        }
+
+        .vn-header__brand {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .vn-header__logo {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-red-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: var(--font-bold);
+            color: var(--text-primary);
+            border: 2px solid var(--vn-gold);
+        }
+
+        .vn-header__title {
+            font-size: 22px;
+            font-weight: var(--font-light);
+            letter-spacing: -0.5px;
+        }
+
+        .vn-header__actions {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        /* Language Toggle */
+        .vn-lang {
+            display: flex;
+            background: var(--metro-surface);
+            border: 1px solid var(--metro-border);
+        }
+
+        .vn-lang__btn {
+            padding: 8px 14px;
+            font-size: 13px;
+            font-weight: var(--font-semibold);
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+
+        .vn-lang__btn:hover {
+            color: var(--text-primary);
+        }
+
+        .vn-lang__btn.active {
+            background: var(--vn-red);
+            color: var(--text-primary);
+        }
+
+        /* ============================================
+           MAIN CONTENT
+           ============================================ */
+        .vn-main {
+            padding-top: 70px;
+            padding-bottom: 90px;
+            min-height: 100vh;
+        }
+
+        /* ============================================
+           HERO SECTION
+           ============================================ */
+        .vn-hero {
+            position: relative;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: var(--metro-dark);
+        }
+
+        .vn-hero__bg {
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 80%, rgba(184,56,59,0.2) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(201,169,98,0.1) 0%, transparent 50%),
+                url('https://images.unsplash.com/photo-1604422975597-6a4b8c0d8b97?w=1920&q=80') center/cover;
+        }
+
+        .vn-hero__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(26,26,26,0.85) 0%,
+                rgba(26,26,26,0.5) 50%,
+                rgba(26,26,26,0.9) 100%
+            );
+        }
+
+        .vn-hero__pattern {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(184,56,59,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(184,56,59,0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .vn-hero__content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--space-2xl) var(--space-lg);
+            text-align: center;
+        }
+
+        .vn-hero__badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: 10px 24px;
+            background: rgba(184,56,59,0.2);
+            border: 1px solid var(--vn-red);
+            font-size: 14px;
+            font-weight: var(--font-semilight);
+            color: var(--vn-gold);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: var(--space-lg);
+            animation: fade-slide-up 0.8s ease-out;
+        }
+
+        .vn-hero__badge::before,
+        .vn-hero__badge::after {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: linear-gradient(90deg, var(--vn-gold), transparent);
+        }
+
+        .vn-hero__badge::after {
+            background: linear-gradient(90deg, transparent, var(--vn-gold));
+        }
+
+        .vn-hero__title {
+            font-size: clamp(36px, 8vw, 72px);
+            font-weight: var(--font-light);
+            line-height: 1.1;
+            letter-spacing: -2px;
+            margin-bottom: var(--space-lg);
+            animation: fade-slide-up 0.8s ease-out 0.2s both;
+        }
+
+        .vn-hero__title span {
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .vn-hero__subtitle {
+            font-size: clamp(16px, 2.5vw, 20px);
+            font-weight: var(--font-regular);
+            color: rgba(255,255,255,0.8);
+            max-width: 600px;
+            margin: 0 auto var(--space-xl);
+            animation: fade-slide-up 0.8s ease-out 0.4s both;
+        }
+
+        .vn-hero__actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            animation: fade-slide-up 0.8s ease-out 0.6s both;
+        }
+
+        /* ============================================
+           BUTTONS - Vietnamese Metro Style
+           ============================================ */
+        .vn-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: 16px 32px;
+            font-size: 16px;
+            font-weight: var(--font-semibold);
+            border-radius: 0;
+            transition: all var(--transition-bounce);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vn-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255,255,255,0.1);
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+
+        .vn-btn:hover::before {
+            opacity: 1;
+        }
+
+        .vn-btn:active {
+            transform: scale(0.95);
+        }
+
+        .vn-btn--red {
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-red-dark) 100%);
+            color: var(--text-primary);
+            border: 2px solid var(--vn-red);
+        }
+
+        .vn-btn--red:hover {
+            box-shadow: 0 8px 30px rgba(184,56,59,0.4);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .vn-btn--gold {
+            background: linear-gradient(135deg, var(--vn-gold) 0%, var(--vn-gold-dark) 100%);
+            color: var(--metro-dark);
+            border: 2px solid var(--vn-gold);
+        }
+
+        .vn-btn--gold:hover {
+            box-shadow: 0 8px 30px rgba(201,169,98,0.4);
+            transform: translateY(-3px) scale(1.02);
+        }
+
+        .vn-btn--outline {
+            background: transparent;
+            color: var(--text-primary);
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .vn-btn--outline:hover {
+            border-color: var(--vn-gold);
+            color: var(--vn-gold);
+        }
+
+        .vn-btn--dark {
+            background: var(--metro-surface);
+            color: var(--text-primary);
+            border: 2px solid var(--metro-border);
+        }
+
+        .vn-btn--dark:hover {
+            border-color: var(--vn-red);
+            background: var(--metro-surface-light);
+        }
+
+        /* ============================================
+           PIVOT NAVIGATION
+           ============================================ */
+        .vn-pivot {
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+            background: var(--metro-surface);
+            border-bottom: 1px solid var(--metro-border);
+        }
+
+        .vn-pivot__nav {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+
+        .vn-pivot__nav::-webkit-scrollbar {
+            display: none;
+        }
+
+        .vn-pivot__tab {
+            scroll-snap-align: start;
+            flex-shrink: 0;
+            padding: var(--space-md) var(--space-lg);
+            font-size: 17px;
+            font-weight: var(--font-regular);
+            color: var(--text-secondary);
+            position: relative;
+            transition: color var(--transition-fast);
+        }
+
+        .vn-pivot__tab:hover {
+            color: var(--text-primary);
+        }
+
+        .vn-pivot__tab.active {
+            color: var(--vn-gold);
+            font-weight: var(--font-semibold);
+        }
+
+        .vn-pivot__tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: var(--space-md);
+            right: var(--space-md);
+            height: 3px;
+            background: linear-gradient(90deg, var(--vn-red), var(--vn-gold));
+            animation: appbar-slide-up 0.3s ease;
+        }
+
+        /* ============================================
+           SECTION STYLES
+           ============================================ */
+        .vn-section {
+            padding: var(--space-2xl) var(--space-md);
+        }
+
+        .vn-section--alt {
+            background: var(--metro-surface);
+        }
+
+        .vn-section__header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+
+        .vn-section__eyebrow {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: var(--font-semilight);
+            color: var(--vn-gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .vn-section__title {
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: var(--font-light);
+            letter-spacing: -1px;
+        }
+
+        .vn-section__subtitle {
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin-top: var(--space-sm);
+        }
+
+        /* ============================================
+           LIVE TILES GRID
+           ============================================ */
+        .vn-tiles {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(var(--tile-small), 1fr));
+            gap: var(--space-sm);
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--space-md);
+        }
+
+        /* Tile Base */
+        .vn-tile {
+            background: var(--metro-surface);
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+            border-left: 4px solid var(--vn-red);
+        }
+
+        .vn-tile:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+
+        .vn-tile:active {
+            animation: tile-bounce 0.4s ease;
+        }
+
+        .vn-tile--small {
+            height: var(--tile-small);
+        }
+
+        .vn-tile--medium {
+            grid-column: span 2;
+            height: var(--tile-medium-h);
+        }
+
+        .vn-tile--large {
+            grid-column: span 2;
+            grid-row: span 2;
+            height: calc(var(--tile-large) * 2 + var(--space-sm));
+        }
+
+        /* Tile Colors - Vietnamese */
+        .vn-tile--red { background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-red-dark) 100%); border-left-color: var(--vn-gold); }
+        .vn-tile--gold { background: linear-gradient(135deg, var(--vn-gold) 0%, var(--vn-gold-dark) 100%); color: var(--metro-dark); }
+        .vn-tile--dark { background: var(--metro-dark); border-left-color: var(--vn-gold); }
+
+        /* Tile Content */
+        .vn-tile__inner {
+            height: 100%;
+            padding: var(--space-md);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vn-tile--large .vn-tile__inner {
+            padding: var(--space-lg);
+        }
+
+        .vn-tile__icon {
+            font-size: 36px;
+            margin-bottom: var(--space-sm);
+            color: var(--vn-red);
+        }
+
+        .vn-tile--red .vn-tile__icon,
+        .vn-tile--gold .vn-tile__icon {
+            color: inherit;
+            opacity: 0.9;
+        }
+
+        .vn-tile--large .vn-tile__icon {
+            font-size: 56px;
+        }
+
+        .vn-tile__title {
+            font-size: 18px;
+            font-weight: var(--font-semibold);
+            line-height: 1.3;
+        }
+
+        .vn-tile--large .vn-tile__title {
+            font-size: 28px;
+        }
+
+        .vn-tile__text {
+            font-size: 13px;
+            opacity: 0.85;
+            margin-top: var(--space-xs);
+            line-height: 1.4;
+        }
+
+        .vn-tile--large .vn-tile__text {
+            font-size: 15px;
+        }
+
+        .vn-tile__link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            font-size: 14px;
+            font-weight: var(--font-semibold);
+            margin-top: auto;
+            padding-top: var(--space-sm);
+            color: var(--vn-gold);
+            transition: gap var(--transition-fast);
+        }
+
+        .vn-tile:hover .vn-tile__link {
+            gap: var(--space-sm);
+        }
+
+        /* Live Tile Badge */
+        .vn-tile__live {
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            padding: 4px 10px;
+            background: var(--vn-gold);
+            color: var(--metro-dark);
+            font-size: 11px;
+            font-weight: var(--font-bold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: live-pulse 2s ease-in-out infinite;
+        }
+
+        /* ============================================
+           PRODUCTS SECTION - Vietnamese Crafts
+           ============================================ */
+        .vn-products {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-md);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .vn-product-card {
+            background: var(--metro-surface);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+            position: relative;
+        }
+
+        .vn-product-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.4);
+        }
+
+        .vn-product-card:active {
+            animation: tile-bounce 0.4s ease;
+        }
+
+        .vn-product-card__image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform var(--transition-smooth);
+        }
+
+        .vn-product-card:hover .vn-product-card__image {
+            transform: scale(1.08);
+        }
+
+        .vn-product-card__overlay {
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .vn-product-card__badge {
+            padding: 6px 12px;
+            background: var(--vn-red);
+            color: var(--text-primary);
+            font-size: 11px;
+            font-weight: var(--font-bold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .vn-product-card__price {
+            padding: 6px 12px;
+            background: var(--vn-gold);
+            color: var(--metro-dark);
+            font-size: 14px;
+            font-weight: var(--font-bold);
+        }
+
+        .vn-product-card__info {
+            padding: var(--space-md);
+        }
+
+        .vn-product-card__category {
+            font-size: 12px;
+            color: var(--vn-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-xs);
+        }
+
+        .vn-product-card__name {
+            font-size: 18px;
+            font-weight: var(--font-semibold);
+            margin-bottom: var(--space-xs);
+            line-height: 1.3;
+        }
+
+        .vn-product-card__artisan {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .vn-product-card__actions {
+            display: flex;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            padding-top: 0;
+        }
+
+        .vn-product-card__actions .vn-btn {
+            flex: 1;
+            padding: 12px;
+            font-size: 14px;
+        }
+
+        /* ============================================
+           ABOUT SECTION
+           ============================================ */
+        .vn-about {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .vn-about__image {
+            position: relative;
+        }
+
+        .vn-about__image img {
+            width: 100%;
+            height: 500px;
+            object-fit: cover;
+            border: 3px solid var(--vn-red);
+        }
+
+        .vn-about__frame {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            border: 3px solid var(--vn-gold);
+            pointer-events: none;
+        }
+
+        .vn-about__content {
+            padding: var(--space-lg);
+        }
+
+        .vn-about__eyebrow {
+            font-size: 13px;
+            font-weight: var(--font-semilight);
+            color: var(--vn-gold);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: var(--space-md);
+        }
+
+        .vn-about__title {
+            font-size: clamp(28px, 4vw, 38px);
+            font-weight: var(--font-light);
+            letter-spacing: -1px;
+            margin-bottom: var(--space-lg);
+        }
+
+        .vn-about__text {
+            font-size: 17px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+        }
+
+        .vn-about__highlight {
+            background: var(--metro-surface);
+            padding: var(--space-lg);
+            border-left: 4px solid var(--vn-red);
+            margin-bottom: var(--space-lg);
+        }
+
+        .vn-about__highlight p {
+            font-size: 16px;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        /* ============================================
+           CUSTOM ORDER - WINDOWS STORE STYLE
+           ============================================ */
+
+        .vn-store {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--metro-surface);
+        }
+
+        /* Store Header - App Hero */
+        .vn-store__hero {
+            display: flex;
+            gap: var(--space-xl);
+            padding: var(--space-xl);
+            background: linear-gradient(135deg, rgba(184,56,59,0.15) 0%, rgba(201,169,98,0.1) 100%);
+            border-bottom: 1px solid var(--metro-border);
+        }
+
+        .vn-store__hero-image {
+            flex-shrink: 0;
+            width: 280px;
+            height: 200px;
+            object-fit: cover;
+            border: 3px solid var(--vn-red);
+            animation: red-glow 3s ease-in-out infinite;
+        }
+
+        .vn-store__hero-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .vn-store__category {
+            font-size: 12px;
+            color: var(--vn-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .vn-store__title {
+            font-size: 32px;
+            font-weight: var(--font-light);
+            margin-bottom: var(--space-sm);
+        }
+
+        .vn-store__developer {
+            font-size: 16px;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        .vn-store__developer span {
+            color: var(--vn-gold);
+        }
+
+        .vn-store__rating {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .vn-store__stars {
+            display: flex;
+            gap: 2px;
+            font-size: 20px;
+            color: var(--vn-gold);
+        }
+
+        .vn-store__rating-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .vn-store__price-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: 8px 20px;
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-red-dark) 100%);
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: var(--font-bold);
+            margin-bottom: var(--space-md);
+        }
+
+        .vn-store__actions {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: auto;
+        }
+
+        .vn-store__install-btn {
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-red-dark) 100%);
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: var(--font-semibold);
+            border: none;
+            transition: all var(--transition-bounce);
+        }
+
+        .vn-store__install-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(184,56,59,0.4);
+        }
+
+        .vn-store__install-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Store Screenshots */
+        .vn-store__screenshots {
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--metro-border);
+        }
+
+        .vn-store__screenshots-title {
+            font-size: 14px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-md);
+        }
+
+        .vn-store__screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-sm);
+        }
+
+        .vn-store__screenshot {
+            aspect-ratio: 16/10;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            border: 2px solid transparent;
+        }
+
+        .vn-store__screenshot:hover {
+            transform: scale(1.05);
+            border-color: var(--vn-gold);
+        }
+
+        .vn-store__screenshot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Store Description */
+        .vn-store__description {
+            padding: var(--space-xl);
+            border-bottom: 1px solid var(--metro-border);
+        }
+
+        .vn-store__description-title {
+            font-size: 20px;
+            font-weight: var(--font-semibold);
+            margin-bottom: var(--space-md);
+            color: var(--vn-gold);
+        }
+
+        .vn-store__description-text {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+        }
+
+        .vn-store__features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+
+        .vn-store__feature {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--metro-dark);
+        }
+
+        .vn-store__feature-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-gold) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .vn-store__feature-text h4 {
+            font-size: 15px;
+            font-weight: var(--font-semibold);
+            margin-bottom: 4px;
+        }
+
+        .vn-store__feature-text p {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        /* Store Options */
+        .vn-store__options {
+            padding: var(--space-xl);
+            border-bottom: 1px solid var(--metro-border);
+        }
+
+        .vn-store__options-title {
+            font-size: 20px;
+            font-weight: var(--font-semibold);
+            margin-bottom: var(--space-lg);
+            color: var(--vn-gold);
+        }
+
+        .vn-store__options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        .vn-store__option {
+            background: var(--metro-dark);
+            padding: var(--space-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+            border: 2px solid transparent;
+        }
+
+        .vn-store__option:hover {
+            border-color: var(--vn-gold);
+            transform: translateY(-4px);
+        }
+
+        .vn-store__option.selected {
+            border-color: var(--vn-red);
+            background: rgba(184,56,59,0.1);
+        }
+
+        .vn-store__option-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto var(--space-md);
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-gold) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .vn-store__option-name {
+            font-size: 16px;
+            font-weight: var(--font-semibold);
+            margin-bottom: var(--space-xs);
+        }
+
+        .vn-store__option-price {
+            font-size: 18px;
+            color: var(--vn-gold);
+            font-weight: var(--font-bold);
+        }
+
+        .vn-store__option-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: var(--space-sm);
+        }
+
+        /* Store Form */
+        .vn-store__form {
+            padding: var(--space-xl);
+        }
+
+        .vn-store__form-title {
+            font-size: 20px;
+            font-weight: var(--font-semibold);
+            margin-bottom: var(--space-lg);
+            color: var(--vn-gold);
+        }
+
+        .vn-form__group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .vn-form__label {
+            display: block;
+            font-size: 14px;
+            font-weight: var(--font-semibold);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .vn-form__input,
+        .vn-form__textarea,
+        .vn-form__select {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--metro-dark);
+            border: 2px solid var(--metro-border);
+            color: var(--text-primary);
+            font-size: 16px;
+            font-family: var(--font-metro);
+            transition: border-color var(--transition-fast);
+        }
+
+        .vn-form__input:focus,
+        .vn-form__textarea:focus,
+        .vn-form__select:focus {
+            outline: none;
+            border-color: var(--vn-gold);
+        }
+
+        .vn-form__textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .vn-form__row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+
+        .vn-form__submit {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-red-dark) 100%);
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: var(--font-bold);
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+        }
+
+        .vn-form__submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(184,56,59,0.4);
+        }
+
+        /* ============================================
+           PEOPLE HUB - ARTISAN SECTION
+           ============================================ */
+        .vn-people-hub {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: var(--metro-dark);
+        }
+
+        .vn-hub-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-lg);
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-red-dark) 100%);
+        }
+
+        .vn-hub-header__title {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .vn-hub-header__icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .vn-hub-header__text h2 {
+            font-size: 24px;
+            font-weight: var(--font-light);
+        }
+
+        .vn-hub-header__text span {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .vn-hub-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .vn-hub-action {
+            width: 44px;
+            height: 44px;
+            background: rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all var(--transition-fast);
+        }
+
+        .vn-hub-action:hover {
+            background: rgba(0,0,0,0.4);
+            transform: scale(1.1);
+        }
+
+        .vn-hub-search {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--metro-surface);
+            border-bottom: 1px solid var(--metro-border);
+        }
+
+        .vn-hub-search__icon {
+            font-size: 20px;
+            color: var(--text-secondary);
+        }
+
+        .vn-hub-search__input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-size: 17px;
+            color: var(--text-primary);
+            font-family: var(--font-metro);
+        }
+
+        .vn-hub-search__input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .vn-hub-group-header {
+            padding: var(--space-sm) var(--space-lg);
+            background: var(--metro-surface);
+            font-size: 13px;
+            font-weight: var(--font-semibold);
+            color: var(--vn-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+
+        .vn-person {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) var(--space-lg);
+            background: var(--metro-dark);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .vn-person:hover {
+            background: var(--metro-surface);
+        }
+
+        .vn-person:active {
+            background: rgba(184,56,59,0.1);
+        }
+
+        .vn-avatar {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .vn-avatar__image {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--metro-surface);
+            transition: border-color var(--transition-fast);
+        }
+
+        .vn-person:hover .vn-avatar__image {
+            border-color: var(--vn-gold);
+        }
+
+        .vn-avatar__status {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 18px;
+            height: 18px;
+            background: #4CAF50;
+            border: 3px solid var(--metro-dark);
+            border-radius: 50%;
+            animation: live-pulse 2s ease-in-out infinite;
+        }
+
+        .vn-person__info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .vn-person__name {
+            font-size: 20px;
+            font-weight: var(--font-semilight);
+            margin-bottom: 4px;
+        }
+
+        .vn-person__craft {
+            font-size: 14px;
+            color: var(--vn-gold);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .vn-person__location {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .vn-person__actions {
+            display: flex;
+            gap: var(--space-sm);
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all var(--transition-fast);
+        }
+
+        .vn-person:hover .vn-person__actions {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .vn-quick-action {
+            width: 44px;
+            height: 44px;
+            background: var(--metro-surface);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            transition: all var(--transition-fast);
+        }
+
+        .vn-quick-action:hover {
+            transform: scale(1.1);
+        }
+
+        .vn-quick-action--message {
+            background: var(--vn-red);
+        }
+
+        .vn-quick-action--info {
+            background: var(--vn-gold);
+            color: var(--metro-dark);
+        }
+
+        /* ============================================
+           FEATURED ARTISAN
+           ============================================ */
+        .vn-featured {
+            padding: var(--space-lg);
+            background: linear-gradient(135deg, rgba(184,56,59,0.1) 0%, rgba(201,169,98,0.1) 100%);
+            border: 1px solid var(--vn-red);
+            margin: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xl);
+        }
+
+        .vn-featured__avatar {
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .vn-featured__avatar img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--vn-gold);
+            object-fit: cover;
+        }
+
+        .vn-featured__badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            padding: 4px 10px;
+            background: var(--vn-red);
+            color: var(--text-primary);
+            font-size: 11px;
+            font-weight: var(--font-bold);
+            text-transform: uppercase;
+        }
+
+        .vn-featured__info {
+            flex: 1;
+        }
+
+        .vn-featured__name {
+            font-size: 28px;
+            font-weight: var(--font-light);
+            margin-bottom: var(--space-xs);
+        }
+
+        .vn-featured__craft {
+            font-size: 16px;
+            color: var(--vn-gold);
+            margin-bottom: var(--space-sm);
+        }
+
+        .vn-featured__desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-md);
+        }
+
+        .vn-featured__stats {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        .vn-stat__number {
+            font-size: 24px;
+            font-weight: var(--font-bold);
+        }
+
+        .vn-stat__label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+        }
+
+        .vn-featured__actions {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        /* ============================================
+           CTA SECTION
+           ============================================ */
+        .vn-cta {
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-red-dark) 100%);
+            padding: var(--space-2xl) var(--space-lg);
+            text-align: center;
+        }
+
+        .vn-cta__title {
+            font-size: clamp(28px, 5vw, 42px);
+            font-weight: var(--font-light);
+            letter-spacing: -1px;
+            margin-bottom: var(--space-md);
+        }
+
+        .vn-cta__text {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: var(--space-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ============================================
+           BOTTOM APP BAR
+           ============================================ */
+        .vn-appbar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--metro-dark);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            border-top: 3px solid var(--vn-red);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.3);
+            animation: appbar-slide-up 0.4s ease;
+        }
+
+        .vn-appbar__item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: var(--space-sm) var(--space-md);
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            position: relative;
+        }
+
+        .vn-appbar__item:hover,
+        .vn-appbar__item.active {
+            color: var(--vn-gold);
+        }
+
+        .vn-appbar__item.active::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 6px;
+            background: var(--vn-red);
+            border-radius: 50%;
+        }
+
+        .vn-appbar__icon {
+            font-size: 26px;
+        }
+
+        .vn-appbar__label {
+            font-size: 12px;
+        }
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .vn-footer {
+            background: var(--metro-dark);
+            padding: var(--space-2xl) var(--space-lg) 120px;
+            border-top: 1px solid rgba(184,56,59,0.3);
+        }
+
+        .vn-footer__grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: var(--space-xl);
+            max-width: 1200px;
+            margin: 0 auto var(--space-xl);
+        }
+
+        .vn-footer__brand {
+            max-width: 300px;
+        }
+
+        .vn-footer__logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-lg);
+        }
+
+        .vn-footer__logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-gold) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: var(--font-bold);
+        }
+
+        .vn-footer__logo-text {
+            font-size: 16px;
+            font-weight: var(--font-light);
+        }
+
+        .vn-footer__description {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .vn-footer__heading {
+            font-size: 13px;
+            font-weight: var(--font-semibold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-lg);
+            color: var(--vn-gold);
+        }
+
+        .vn-footer__links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .vn-footer__link {
+            font-size: 14px;
+            color: var(--text-secondary);
+            transition: color var(--transition-fast);
+        }
+
+        .vn-footer__link:hover {
+            color: var(--text-primary);
+        }
+
+        .vn-footer__social {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .vn-footer__social-link {
+            width: 40px;
+            height: 40px;
+            background: var(--metro-surface);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            transition: all var(--transition-fast);
+        }
+
+        .vn-footer__social-link:hover {
+            background: var(--vn-red);
+            transform: translateY(-2px);
+        }
+
+        .vn-footer__bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--metro-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .vn-footer__copyright {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* ============================================
+           SCROLL ANIMATIONS
+           ============================================ */
+        .vn-animate {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .vn-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .vn-animate--delay-1 { transition-delay: 0.1s; }
+        .vn-animate--delay-2 { transition-delay: 0.2s; }
+        .vn-animate--delay-3 { transition-delay: 0.3s; }
+        .vn-animate--delay-4 { transition-delay: 0.4s; }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 1024px) {
+            .vn-products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .vn-tiles {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .vn-tile--large {
+                grid-column: span 2;
+                grid-row: span 1;
+                height: var(--tile-medium-h);
+            }
+
+            .vn-about {
+                grid-template-columns: 1fr;
+            }
+
+            .vn-store__hero {
+                flex-direction: column;
+            }
+
+            .vn-store__hero-image {
+                width: 100%;
+                height: 200px;
+            }
+
+            .vn-store__screenshots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .vn-store__options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .vn-footer__grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .vn-header__title {
+                display: none;
+            }
+
+            .vn-products {
+                grid-template-columns: 1fr;
+            }
+
+            .vn-tiles {
+                grid-template-columns: 1fr;
+            }
+
+            .vn-tile--medium,
+            .vn-tile--large {
+                grid-column: span 1;
+            }
+
+            .vn-tile--large {
+                height: auto;
+                min-height: 300px;
+            }
+
+            .vn-store__options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vn-form__row {
+                grid-template-columns: 1fr;
+            }
+
+            .vn-featured {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .vn-featured__stats {
+                justify-content: center;
+            }
+
+            .vn-featured__actions {
+                width: 100%;
+            }
+
+            .vn-featured__actions .vn-btn {
+                width: 100%;
+            }
+
+            .vn-person {
+                flex-wrap: wrap;
+            }
+
+            .vn-person__actions {
+                opacity: 1;
+                transform: translateX(0);
+                width: 100%;
+                justify-content: center;
+                padding-top: var(--space-sm);
+            }
+
+            .vn-footer__grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vn-footer__bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .vn-hero__actions {
+                flex-direction: column;
+            }
+
+            .vn-hero__actions .vn-btn {
+                width: 100%;
+            }
+
+            .vn-appbar__label {
+                display: none;
+            }
+
+            .vn-appbar {
+                justify-content: space-around;
+            }
+        }
+
+        /* ============================================
+           REDUCED MOTION
+           ============================================ */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .vn-animate {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        /* ============================================
+           MOBILE MENU
+           ============================================ */
+        .vn-mobile-menu {
+            display: none;
+        }
+
+        .vn-menu-toggle {
+            display: none;
+            width: 44px;
+            height: 44px;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .vn-appbar {
+                display: none;
+            }
+
+            .vn-mobile-menu {
+                display: block;
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--metro-dark);
+                z-index: 999;
+                padding: var(--space-lg);
+                transform: translateX(-100%);
+                transition: transform var(--transition-smooth);
+            }
+
+            .vn-mobile-menu.active {
+                transform: translateX(0);
+            }
+
+            .vn-mobile-menu__nav {
+                display: flex;
+                flex-direction: column;
+                gap: var(--space-xs);
+            }
+
+            .vn-mobile-menu__link {
+                padding: var(--space-md);
+                font-size: 20px;
+                color: var(--text-primary);
+                border-bottom: 1px solid var(--metro-border);
+            }
+
+            .vn-menu-toggle {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="vn-header">
+        <div class="vn-header__brand">
+            <div class="vn-header__logo">VN</div>
+            <span class="vn-header__title" data-lang-vi="Thủ Công Mỹ Nghệ" data-lang-en="Artisan Crafts">Thủ Công Mỹ Nghệ</span>
+        </div>
+
+        <div class="vn-header__actions">
+            <div class="vn-lang" role="group" aria-label="Language selection">
+                <button class="vn-lang__btn active" data-lang="vi" aria-pressed="true">VI</button>
+                <button class="vn-lang__btn" data-lang="en" aria-pressed="false">EN</button>
+            </div>
+
+            <button class="vn-menu-toggle" aria-label="Menu">
+                <i class="ph ph-list"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <nav class="vn-mobile-menu" aria-label="Mobile navigation">
+        <div class="vn-mobile-menu__nav">
+            <a href="#home" class="vn-mobile-menu__link" data-lang-vi="Trang chủ" data-lang-en="Home">Trang chủ</a>
+            <a href="#products" class="vn-mobile-menu__link" data-lang-vi="Sản phẩm" data-lang-en="Products">Sản phẩm</a>
+            <a href="#custom" class="vn-mobile-menu__link" data-lang-vi="Đặt theo yêu cầu" data-lang-en="Custom Order">Đặt theo yêu cầu</a>
+            <a href="#artisans" class="vn-mobile-menu__link" data-lang-vi="Nghệ nhân" data-lang-en="Artisans">Nghệ nhân</a>
+            <a href="#contact" class="vn-mobile-menu__link" data-lang-vi="Liên hệ" data-lang-en="Contact">Liên hệ</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="vn-main">
+        <!-- Hero Section -->
+        <section id="home" class="vn-hero">
+            <div class="vn-hero__bg"></div>
+            <div class="vn-hero__overlay"></div>
+            <div class="vn-hero__pattern"></div>
+            <div class="vn-hero__content">
+                <span class="vn-hero__badge" data-lang-vi="Kết nối nghệ thuật - Kết nối thế giới" data-lang-en="Connecting Art - Connecting the World">
+                    Kết nối nghệ thuật - Kết nối thế giới
+                </span>
+                <h1 class="vn-hero__title" data-lang-vi='Nghệ Thuật <span>Thủ Công Mỹ Nghệ</span> Việt Nam' data-lang-en='Vietnamese <span>Artisan Crafts</span> & Heritage'>
+                    Nghệ Thuật <span>Thủ Công Mỹ Nghệ</span> Việt Nam
+                </h1>
+                <p class="vn-hero__subtitle" data-lang-vi="Khám phá vẻ đẹp tinh xảo của các tác phẩm thủ công mỹ nghệ truyền thống, kết nối với các nghệ nhân tài ba và bảo tồn di sản văn hóa Việt Nam." data-lang-en="Discover the exquisite beauty of traditional handmade crafts, connect with talented artisans, and preserve Vietnamese cultural heritage.">
+                    Khám phá vẻ đẹp tinh xảo của các tác phẩm thủ công mỹ nghệ truyền thống, kết nối với các nghệ nhân tài ba và bảo tồn di sản văn hóa Việt Nam.
+                </p>
+                <div class="vn-hero__actions">
+                    <a href="#products" class="vn-btn vn-btn--red">
+                        <i class="ph ph-images"></i>
+                        <span data-lang-vi="Khám Phá Sản Phẩm" data-lang-en="Explore Products">Khám Phá Sản Phẩm</span>
+                    </a>
+                    <a href="#custom" class="vn-btn vn-btn--gold">
+                        <i class="ph ph-paint-brush"></i>
+                        <span data-lang-vi="Đặt Theo Yêu Cầu" data-lang-en="Custom Order">Đặt Theo Yêu Cầu</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pivot Navigation -->
+        <nav class="vn-pivot" aria-label="Section navigation">
+            <div class="vn-pivot__nav">
+                <a href="#home" class="vn-pivot__tab active" data-lang-vi="Trang Chủ" data-lang-en="Home">Trang Chủ</a>
+                <a href="#products" class="vn-pivot__tab" data-lang-vi="Sản Phẩm" data-lang-en="Products">Sản Phẩm</a>
+                <a href="#custom" class="vn-pivot__tab" data-lang-vi="Đặt Yêu Cầu" data-lang-en="Custom Order">Đặt Yêu Cầu</a>
+                <a href="#artisans" class="vn-pivot__tab" data-lang-vi="Nghệ Nhân" data-lang-en="Artisans">Nghệ Nhân</a>
+            </div>
+        </nav>
+
+        <!-- Products Section -->
+        <section id="products" class="vn-section vn-section--alt">
+            <div class="vn-section__header vn-animate">
+                <span class="vn-section__eyebrow" data-lang-vi="Bộ sưu tập" data-lang-en="Collection">Bộ sưu tập</span>
+                <h2 class="vn-section__title" data-lang-vi="Sản Phẩm Nổi Bật" data-lang-en="Featured Products">Sản Phẩm Nổi Bật</h2>
+                <p class="vn-section__subtitle" data-lang-vi="Những tác phẩm tinh xảo từ các nghệ nhân tài hoa" data-lang-en="Exquisite artworks from talented artisans">Những tác phẩm tinh xảo từ các nghệ nhân tài hoa</p>
+            </div>
+
+            <div class="vn-products">
+                <!-- Product 1 -->
+                <article class="vn-product-card vn-animate vn-animate--delay-1">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80" alt="Tranh Đông Hồ" class="vn-product-card__image" loading="lazy">
+                    <div class="vn-product-card__overlay">
+                        <span class="vn-product-card__badge">Bán chạy</span>
+                    </div>
+                    <div class="vn-product-card__info">
+                        <span class="vn-product-card__category">Tranh Đông Hồ</span>
+                        <h3 class="vn-product-card__name" data-lang-vi="Tranh Tết "Đám Hỏa Quan Âm"" data-lang-en="Tet Painting "Bodhidharma Crossing Sea"">Tranh Tết "Đám Hỏa Quan Âm"</h3>
+                        <p class="vn-product-card__artisan">
+                            <i class="ph ph-user"></i>
+                            <span data-lang-vi="Nguyễn Văn Minh" data-lang-en="Nguyen Van Minh">Nguyễn Văn Minh</span>
+                        </p>
+                    </div>
+                    <div class="vn-product-card__actions">
+                        <span class="vn-product-card__price">2.500.000 ₫</span>
+                        <button class="vn-btn vn-btn--red" style="flex:1;padding:10px;font-size:14px;">
+                            <i class="ph ph-shopping-cart"></i>
+                            <span data-lang-vi="Mua" data-lang-en="Buy">Mua</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Product 2 -->
+                <article class="vn-product-card vn-animate vn-animate--delay-2">
+                    <img src="https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?w=400&q=80" alt="Lụa Vạn Phúc" class="vn-product-card__image" loading="lazy">
+                    <div class="vn-product-card__overlay">
+                        <span class="vn-product-card__badge" style="background:var(--vn-gold);color:var(--metro-dark);">Mới</span>
+                        <span class="vn-product-card__price">850.000 ₫</span>
+                    </div>
+                    <div class="vn-product-card__info">
+                        <span class="vn-product-card__category">Lụa Vạn Phúc</span>
+                        <h3 class="vn-product-card__name" data-lang-vi="Áo Dài Lụa Trắng Cổ Điển" data-lang-en="Classic White Silk Ao Dai">Áo Dài Lụa Trắng Cổ Điển</h3>
+                        <p class="vn-product-card__artisan">
+                            <i class="ph ph-user"></i>
+                            <span data-lang-vi="Trần Thị Lan" data-lang-en="Tran Thi Lan">Trần Thị Lan</span>
+                        </p>
+                    </div>
+                    <div class="vn-product-card__actions">
+                        <button class="vn-btn vn-btn--dark" style="flex:1;padding:10px;font-size:14px;">
+                            <i class="ph ph-shopping-cart"></i>
+                            <span data-lang-vi="Mua" data-lang-en="Buy">Mua</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Product 3 -->
+                <article class="vn-product-card vn-animate vn-animate--delay-3">
+                    <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400&q=80" alt="Gốm Bát Tràng" class="vn-product-card__image" loading="lazy">
+                    <div class="vn-product-card__overlay">
+                        <span class="vn-product-card__price">1.200.000 ₫</span>
+                    </div>
+                    <div class="vn-product-card__info">
+                        <span class="vn-product-card__category">Gốm Bát Tràng</span>
+                        <h3 class="vn-product-card__name" data-lang-vi="Bình Hoa Gốm Men Trắng Xanh" data-lang-en="White Glaze Blue Flower Vase">Bình Hoa Gốm Men Trắng Xanh</h3>
+                        <p class="vn-product-card__artisan">
+                            <i class="ph ph-user"></i>
+                            <span data-lang-vi="Lê Hồng Sơn" data-lang-en="Le Hong Son">Lê Hồng Sơn</span>
+                        </p>
+                    </div>
+                    <div class="vn-product-card__actions">
+                        <button class="vn-btn vn-btn--dark" style="flex:1;padding:10px;font-size:14px;">
+                            <i class="ph ph-shopping-cart"></i>
+                            <span data-lang-vi="Mua" data-lang-en="Buy">Mua</span>
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Product 4 -->
+                <article class="vn-product-card vn-animate vn-animate--delay-4">
+                    <img src="https://images.unsplash.com/photo-1590736969955-71cc94901144?w=400&q=80" alt="Nón Huế" class="vn-product-card__image" loading="lazy">
+                    <div class="vn-product-card__overlay">
+                        <span class="vn-product-card__badge" style="background:var(--vn-gold);color:var(--metro-dark);">Limited</span>
+                        <span class="vn-product-card__price">450.000 ₫</span>
+                    </div>
+                    <div class="vn-product-card__info">
+                        <span class="vn-product-card__category">Nón Huế</span>
+                        <h3 class="vn-product-card__name" data-lang-vi="Nón Lá Guốc Đặc Biệt" data-lang-en="Special Conical Hat">Nón Lá Guốc Đặc Biệt</h3>
+                        <p class="vn-product-card__artisan">
+                            <i class="ph ph-user"></i>
+                            <span data-lang-vi="Phạm Thị Hương" data-lang-en="Pham Thi Huong">Phạm Thị Hương</span>
+                        </p>
+                    </div>
+                    <div class="vn-product-card__actions">
+                        <button class="vn-btn vn-btn--dark" style="flex:1;padding:10px;font-size:14px;">
+                            <i class="ph ph-shopping-cart"></i>
+                            <span data-lang-vi="Mua" data-lang-en="Buy">Mua</span>
+                        </button>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Custom Order Section - Windows Store Style -->
+        <section id="custom" class="vn-section">
+            <div class="vn-section__header vn-animate">
+                <span class="vn-section__eyebrow" data-lang-vi="Dịch vụ" data-lang-en="Service">Dịch vụ</span>
+                <h2 class="vn-section__title" data-lang-vi="Đặt Tranh Theo Yêu Cầu" data-lang-en="Custom Painting Order">Đặt Tranh Theo Yêu Cầu</h2>
+                <p class="vn-section__subtitle" data-lang-vi="Tạo tác phẩm độc đáo theo ý tưởng của bạn" data-lang-en="Create unique artworks based on your ideas">Tạo tác phẩm độc đáo theo ý tưởng của bạn</p>
+            </div>
+
+            <div class="vn-store vn-animate">
+                <!-- Store Hero -->
+                <div class="vn-store__hero">
+                    <img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=600&q=80" alt="Custom Painting Service" class="vn-store__hero-image">
+                    <div class="vn-store__hero-info">
+                        <span class="vn-store__category" data-lang-vi="Dịch Vụ Thiết Kế" data-lang-en="Design Service">Dịch Vụ Thiết Kế</span>
+                        <h2 class="vn-store__title" data-lang-vi="Đặt Tranh Theo Yêu Cầu" data-lang-en="Custom Painting Order">Đặt Tranh Theo Yêu Cầu</h2>
+                        <p class="vn-store__developer">
+                            <span data-lang-vi="Bởi" data-lang-en="By">Bởi</span> <span>Thủ Công Mỹ Nghệ Việt Nam</span>
+                        </p>
+                        <div class="vn-store__rating">
+                            <div class="vn-store__stars">
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star-half"></i>
+                            </div>
+                            <span class="vn-store__rating-text">4.8/5 (256 đánh giá)</span>
+                        </div>
+                        <div class="vn-store__price-badge">
+                            <i class="ph ph-tag"></i>
+                            <span data-lang-vi="Từ 1.500.000 VNĐ" data-lang-en="From 1,500,000 VND">Từ 1.500.000 VNĐ</span>
+                        </div>
+                        <div class="vn-store__actions">
+                            <button class="vn-store__install-btn">
+                                <i class="ph ph-paint-brush"></i>
+                                <span data-lang-vi="Bắt Đầu Đặt Hàng" data-lang-en="Start Order">Bắt Đầu Đặt Hàng</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Screenshots -->
+                <div class="vn-store__screenshots">
+                    <h3 class="vn-store__screenshots-title" data-lang-vi="Mẫu thiết kế" data-lang-en="Design Templates">Mẫu thiết kế</h3>
+                    <div class="vn-store__screenshots-grid">
+                        <div class="vn-store__screenshot">
+                            <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=300&q=80" alt="Template 1">
+                        </div>
+                        <div class="vn-store__screenshot">
+                            <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?w=300&q=80" alt="Template 2">
+                        </div>
+                        <div class="vn-store__screenshot">
+                            <img src="https://images.unsplash.com/photo-1578926288207-a90a5366759d?w=300&q=80" alt="Template 3">
+                        </div>
+                        <div class="vn-store__screenshot">
+                            <img src="https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?w=300&q=80" alt="Template 4">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="vn-store__description">
+                    <h3 class="vn-store__description-title" data-lang-vi="Mô Tả Dịch Vụ" data-lang-en="Service Description">Mô Tả Dịch Vụ</h3>
+                    <p class="vn-store__description-text" data-lang-vi="Biến ý tưởng của bạn thành tác phẩm nghệ thuật độc đáo. Đội ngũ nghệ nhân tài hoa của chúng tôi sẽ làm việc trực tiếp với bạn để tạo ra những bức tranh, tác phẩm gốm, hay các sản phẩm thủ công mỹ nghệ theo đúng ý muốn. Mỗi sản phẩm đều mang đậm dấu ấn cá nhân và giá trị văn hóa Việt Nam." data-lang-en="Turn your ideas into unique artworks. Our talented artisans will work directly with you to create paintings, ceramic pieces, or handicrafts according to your preferences. Each product carries a personal touch and Vietnamese cultural value.">
+                        Biến ý tưởng của bạn thành tác phẩm nghệ thuật độc đáo. Đội ngũ nghệ nhân tài hoa của chúng tôi sẽ làm việc trực tiếp với bạn để tạo ra những bức tranh, tác phẩm gốm, hay các sản phẩm thủ công mỹ nghệ theo đúng ý muốn. Mỗi sản phẩm đều mang đậm dấu ấn cá nhân và giá trị văn hóa Việt Nam.
+                    </p>
+
+                    <div class="vn-store__features">
+                        <div class="vn-store__feature">
+                            <div class="vn-store__feature-icon">
+                                <i class="ph ph-palette"></i>
+                            </div>
+                            <div class="vn-store__feature-text">
+                                <h4 data-lang-vi="Thiết Kế Tùy Chỉnh" data-lang-en="Custom Design">Thiết Kế Tùy Chỉnh</h4>
+                                <p data-lang-vi="Theo yêu cầu về chủ đề, màu sắc, kích thước" data-lang-en="Based on your theme, color, and size requirements">Theo yêu cầu về chủ đề, màu sắc, kích thước</p>
+                            </div>
+                        </div>
+                        <div class="vn-store__feature">
+                            <div class="vn-store__feature-icon">
+                                <i class="ph ph-medal"></i>
+                            </div>
+                            <div class="vn-store__feature-text">
+                                <h4 data-lang-vi="Nghệ Nhân Chuyên Nghiệp" data-lang-en="Professional Artisans">Nghệ Nhân Chuyên Nghiệp</h4>
+                                <p data-lang-vi="Đội ngũ nghệ nhân với hàng chục năm kinh nghiệm" data-lang-en="Team of artisans with decades of experience">Đội ngũ nghệ nhân với hàng chục năm kinh nghiệm</p>
+                            </div>
+                        </div>
+                        <div class="vn-store__feature">
+                            <div class="vn-store__feature-icon">
+                                <i class="ph ph-clock"></i>
+                            </div>
+                            <div class="vn-store__feature-text">
+                                <h4 data-lang-vi="Thời Gian Linh Hoạt" data-lang-en="Flexible Timeline">Thời Gian Linh Hoạt</h4>
+                                <p data-lang-vi="Từ 7-30 ngày tùy theo độ phức tạp" data-lang-en="From 7-30 days depending on complexity">Từ 7-30 ngày tùy theo độ phức tạp</p>
+                            </div>
+                        </div>
+                        <div class="vn-store__feature">
+                            <div class="vn-store__feature-icon">
+                                <i class="ph ph-shield-check"></i>
+                            </div>
+                            <div class="vn-store__feature-text">
+                                <h4 data-lang-vi="Bảo Hành Chất Lượng" data-lang-en="Quality Warranty">Bảo Hành Chất Lượng</h4>
+                                <p data-lang-vi="Cam kết chất lượng và nguồn gốc rõ ràng" data-lang-en="Quality commitment and clear provenance">Cam kết chất lượng và nguồn gốc rõ ràng</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Options -->
+                <div class="vn-store__options">
+                    <h3 class="vn-store__options-title" data-lang-vi="Chọn Loại Sản Phẩm" data-lang-en="Select Product Type">Chọn Loại Sản Phẩm</h3>
+                    <div class="vn-store__options-grid">
+                        <div class="vn-store__option selected">
+                            <div class="vn-store__option-icon">
+                                <i class="ph ph-paint-brush"></i>
+                            </div>
+                            <h4 class="vn-store__option-name" data-lang-vi="Tranh Sơn Dầu" data-lang-en="Oil Painting">Tranh Sơn Dầu</h4>
+                            <span class="vn-store__option-price">Từ 2.5M</span>
+                            <p class="vn-store__option-desc" data-lang-vi="Kích thước: 30x40cm - 100x120cm" data-lang-en="Size: 30x40cm - 100x120cm">Kích thước: 30x40cm - 100x120cm</p>
+                        </div>
+                        <div class="vn-store__option">
+                            <div class="vn-store__option-icon" style="background:linear-gradient(135deg, var(--vn-gold) 0%, var(--vn-gold-dark) 100%);">
+                                <i class="ph ph-swatches"></i>
+                            </div>
+                            <h4 class="vn-store__option-name" data-lang-vi="Tranh Sơn Mài" data-lang-en="Lacquer Painting">Tranh Sơn Mài</h4>
+                            <span class="vn-store__option-price">Từ 4.0M</span>
+                            <p class="vn-store__option-desc" data-lang-vi="Kích thước: 40x50cm - 80x100cm" data-lang-en="Size: 40x50cm - 80x100cm">Kích thước: 40x50cm - 80x100cm</p>
+                        </div>
+                        <div class="vn-store__option">
+                            <div class="vn-store__option-icon" style="background:linear-gradient(135deg, #8B4513 0%, #654321 100%);">
+                                <i class="ph ph-coffee"></i>
+                            </div>
+                            <h4 class="vn-store__option-name" data-lang-vi="Gốm Sứ" data-lang-en="Ceramic">Gốm Sứ</h4>
+                            <span class="vn-store__option-price">Từ 1.5M</span>
+                            <p class="vn-store__option-desc" data-lang-vi="Bình, chén, đĩa trang trí" data-lang-en="Vases, cups, decorative plates">Bình, chén, đĩa trang trí</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Order Form -->
+                <div class="vn-store__form">
+                    <h3 class="vn-store__form-title" data-lang-vi="Điền Thông Tin Đặt Hàng" data-lang-en="Fill Order Information">Điền Thông Tin Đặt Hàng</h3>
+                    <form id="customOrderForm">
+                        <div class="vn-form__row">
+                            <div class="vn-form__group">
+                                <label class="vn-form__label" data-lang-vi="Họ và tên" data-lang-en="Full Name">Họ và tên</label>
+                                <input type="text" class="vn-form__input" placeholder="Nguyễn Văn A" required>
+                            </div>
+                            <div class="vn-form__group">
+                                <label class="vn-form__label" data-lang-vi="Số điện thoại" data-lang-en="Phone Number">Số điện thoại</label>
+                                <input type="tel" class="vn-form__input" placeholder="0901 234 567" required>
+                            </div>
+                        </div>
+                        <div class="vn-form__group">
+                            <label class="vn-form__label" data-lang-vi="Email" data-lang-en="Email">Email</label>
+                            <input type="email" class="vn-form__input" placeholder="email@example.com" required>
+                        </div>
+                        <div class="vn-form__row">
+                            <div class="vn-form__group">
+                                <label class="vn-form__label" data-lang-vi="Loại sản phẩm" data-lang-en="Product Type">Loại sản phẩm</label>
+                                <select class="vn-form__select">
+                                    <option value="oil" data-lang-vi="Tranh Sơn Dầu" data-lang-en="Oil Painting">Tranh Sơn Dầu</option>
+                                    <option value="lacquer" data-lang-vi="Tranh Sơn Mài" data-lang-en="Lacquer Painting">Tranh Sơn Mài</option>
+                                    <option value="ceramic" data-lang-vi="Gốm Sứ" data-lang-en="Ceramic">Gốm Sứ</option>
+                                </select>
+                            </div>
+                            <div class="vn-form__group">
+                                <label class="vn-form__label" data-lang-vi="Kích thước mong muốn" data-lang-en="Desired Size">Kích thước mong muốn</label>
+                                <select class="vn-form__select">
+                                    <option value="small" data-lang-vi="Nhỏ (30x40cm)" data-lang-en="Small (30x40cm)">Nhỏ (30x40cm)</option>
+                                    <option value="medium" data-lang-vi="Vừa (50x70cm)" data-lang-en="Medium (50x70cm)">Vừa (50x70cm)</option>
+                                    <option value="large" data-lang-vi="Lớn (80x100cm)" data-lang-en="Large (80x100cm)">Lớn (80x100cm)</option>
+                                    <option value="custom" data-lang-vi="Tùy chỉnh" data-lang-en="Custom">Tùy chỉnh</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="vn-form__group">
+                            <label class="vn-form__label" data-lang-vi="Mô tả ý tưởng của bạn" data-lang-en="Describe Your Idea">Mô tả ý tưởng của bạn</label>
+                            <textarea class="vn-form__textarea" placeholder="Mô tả chi tiết về ý tưởng, chủ đề, màu sắc, không gian sử dụng..." data-lang-placeholder-vi="Mô tả chi tiết về ý tưởng, chủ đề, màu sắc, không gian sử dụng..." data-lang-placeholder-en="Describe your idea in detail - theme, colors, intended space..."></textarea>
+                        </div>
+                        <button type="submit" class="vn-form__submit">
+                            <i class="ph ph-paper-plane-tilt"></i>
+                            <span data-lang-vi="Gửi Yêu Cầu Đặt Hàng" data-lang-en="Submit Order Request">Gửi Yêu Cầu Đặt Hàng</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Artisans Section - People Hub -->
+        <section id="artisans" class="vn-section vn-section--alt">
+            <div class="vn-people-hub vn-animate">
+                <div class="vn-hub-header">
+                    <div class="vn-hub-header__title">
+                        <div class="vn-hub-header__icon">
+                            <i class="ph ph-users-three"></i>
+                        </div>
+                        <div class="vn-hub-header__text">
+                            <h2 data-lang-vi="Nghệ Nhân" data-lang-en="Artisans">Nghệ Nhân</h2>
+                            <span data-lang-vi="8 người đang hoạt động" data-lang-en="8 artisans active">8 người đang hoạt động</span>
+                        </div>
+                    </div>
+                    <div class="vn-hub-actions">
+                        <button class="vn-hub-action"><i class="ph ph-plus"></i></button>
+                        <button class="vn-hub-action"><i class="ph ph-funnel"></i></button>
+                    </div>
+                </div>
+
+                <div class="vn-hub-search">
+                    <i class="ph ph-magnifying-glass vn-hub-search__icon"></i>
+                    <input type="text" class="vn-hub-search__input" placeholder="Tìm kiếm nghệ nhân..." data-lang-placeholder-vi="Tìm kiếm nghệ nhân..." data-lang-placeholder-en="Search artisans...">
+                </div>
+
+                <!-- Featured Artisan -->
+                <div class="vn-featured">
+                    <div class="vn-featured__avatar">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&q=80" alt="Nguyễn Văn Minh">
+                        <span class="vn-featured__badge">Featured</span>
+                    </div>
+                    <div class="vn-featured__info">
+                        <h3 class="vn-featured__name">Nguyễn Văn Minh</h3>
+                        <p class="vn-featured__craft">
+                            <i class="ph ph-paint-brush"></i>
+                            <span data-lang-vi="Tranh Đông Hồ" data-lang-en="Dong Ho Paintings">Tranh Đông Hồ</span>
+                        </p>
+                        <p class="vn-featured__desc" data-lang-vi="Nghệ nhân ưu tú với hơn 30 năm kinh nghiệm trong nghề tranh Đông Hồ truyền thống." data-lang-en="Master artisan with over 30 years of experience in traditional Dong Ho paintings.">Nghệ nhân ưu tú với hơn 30 năm kinh nghiệm trong nghề tranh Đông Hồ truyền thống.</p>
+                        <div class="vn-featured__stats">
+                            <div class="vn-stat">
+                                <div class="vn-stat__number">156</div>
+                                <div class="vn-stat__label" data-lang-vi="Tác phẩm" data-lang-en="Artworks">Tác phẩm</div>
+                            </div>
+                            <div class="vn-stat">
+                                <div class="vn-stat__number">30+</div>
+                                <div class="vn-stat__label" data-lang-vi="Năm" data-lang-en="Years">Năm</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vn-featured__actions">
+                        <button class="vn-btn vn-btn--red">
+                            <i class="ph ph-chat-circle"></i>
+                            <span data-lang-vi="Liên hệ" data-lang-en="Contact">Liên hệ</span>
+                        </button>
+                        <button class="vn-btn vn-btn--outline">
+                            <i class="ph ph-user"></i>
+                            <span data-lang-vi="Hồ sơ" data-lang-en="Profile">Hồ sơ</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="vn-hub-group-header" data-lang-vi="Nghệ nhân nổi bật" data-lang-en="Featured Artisans">Nghệ nhân nổi bật</div>
+
+                <div class="vn-person">
+                    <div class="vn-avatar">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=200&q=80" alt="Trần Thị Lan" class="vn-avatar__image">
+                        <span class="vn-avatar__status"></span>
+                    </div>
+                    <div class="vn-person__info">
+                        <h4 class="vn-person__name">Trần Thị Lan</h4>
+                        <p class="vn-person__craft">
+                            <i class="ph ph-scissors"></i>
+                            <span data-lang-vi="Nghệ nhân Lụa Vạn Phúc" data-lang-en="Van Phuc Silk Artisan">Nghệ nhân Lụa Vạn Phúc</span>
+                        </p>
+                        <p class="vn-person__location">
+                            <i class="ph ph-map-pin"></i>
+                            <span data-lang-vi="Vạn Phúc, Hà Đông, Hà Nội" data-lang-en="Van Phuc, Ha Dong, Hanoi">Vạn Phúc, Hà Đông, Hà Nội</span>
+                        </p>
+                    </div>
+                    <div class="vn-person__actions">
+                        <button class="vn-quick-action vn-quick-action--message"><i class="ph ph-chat-circle"></i></button>
+                        <button class="vn-quick-action vn-quick-action--info"><i class="ph ph-info"></i></button>
+                    </div>
+                </div>
+
+                <div class="vn-person">
+                    <div class="vn-avatar">
+                        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt="Lê Hồng Sơn" class="vn-avatar__image">
+                        <span class="vn-avatar__status"></span>
+                    </div>
+                    <div class="vn-person__info">
+                        <h4 class="vn-person__name">Lê Hồng Sơn</h4>
+                        <p class="vn-person__craft">
+                            <i class="ph ph-coffee"></i>
+                            <span data-lang-vi="Nghệ nhân Gốm Bát Tràng" data-lang-en="Bat Trang Ceramic Artisan">Nghệ nhân Gốm Bát Tràng</span>
+                        </p>
+                        <p class="vn-person__location">
+                            <i class="ph ph-map-pin"></i>
+                            <span data-lang-vi="Bát Tràng, Gia Lâm, Hà Nội" data-lang-en="Bat Trang, Gia Lam, Hanoi">Bát Tràng, Gia Lâm, Hà Nội</span>
+                        </p>
+                    </div>
+                    <div class="vn-person__actions">
+                        <button class="vn-quick-action vn-quick-action--message"><i class="ph ph-chat-circle"></i></button>
+                        <button class="vn-quick-action vn-quick-action--info"><i class="ph ph-info"></i></button>
+                    </div>
+                </div>
+
+                <div class="vn-person">
+                    <div class="vn-avatar">
+                        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80" alt="Phạm Thị Hương" class="vn-avatar__image">
+                        <span class="vn-avatar__status"></span>
+                    </div>
+                    <div class="vn-person__info">
+                        <h4 class="vn-person__name">Phạm Thị Hương</h4>
+                        <p class="vn-person__craft">
+                            <i class="ph ph-crown"></i>
+                            <span data-lang-vi="Nghệ nhân Nón Huế" data-lang-en="Hue Conical Hat Artisan">Nghệ nhân Nón Huế</span>
+                        </p>
+                        <p class="vn-person__location">
+                            <i class="ph ph-map-pin"></i>
+                            <span data-lang-vi="Phú Hội, Huế, Việt Nam" data-lang-en="Phu Hoi, Hue, Vietnam">Phú Hội, Huế, Việt Nam</span>
+                        </p>
+                    </div>
+                    <div class="vn-person__actions">
+                        <button class="vn-quick-action vn-quick-action--message"><i class="ph ph-chat-circle"></i></button>
+                        <button class="vn-quick-action vn-quick-action--info"><i class="ph ph-info"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="vn-cta vn-animate">
+            <h2 class="vn-cta__title" data-lang-vi="Sẵn Sàng Khám Phá?" data-lang-en="Ready to Explore?">Sẵn Sàng Khám Phá?</h2>
+            <p class="vn-cta__text" data-lang-vi="Hãy để chúng tôi đồng hành cùng bạn trong hành trình khám phá vẻ đẹp nghệ thuật Việt Nam." data-lang-en="Let us accompany you on the journey to discover Vietnamese artistic beauty.">Hãy để chúng tôi đồng hành cùng bạn trong hành trình khám phá vẻ đẹp nghệ thuật Việt Nam.</p>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="#products" class="vn-btn vn-btn--gold">
+                    <i class="ph ph-images"></i>
+                    <span data-lang-vi="Xem Sản Phẩm" data-lang-en="View Products">Xem Sản Phẩm</span>
+                </a>
+                <a href="#contact" class="vn-btn vn-btn--outline">
+                    <i class="ph ph-envelope"></i>
+                    <span data-lang-vi="Liên Hệ Ngay" data-lang-en="Contact Us">Liên Hệ Ngay</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Bottom App Bar -->
+    <nav class="vn-appbar" aria-label="Main navigation">
+        <a href="#home" class="vn-appbar__item active">
+            <i class="ph ph-house vn-appbar__icon"></i>
+            <span class="vn-appbar__label" data-lang-vi="Trang Chủ" data-lang-en="Home">Trang Chủ</span>
+        </a>
+        <a href="#products" class="vn-appbar__item">
+            <i class="ph ph-package vn-appbar__icon"></i>
+            <span class="vn-appbar__label" data-lang-vi="Sản Phẩm" data-lang-en="Products">Sản Phẩm</span>
+        </a>
+        <a href="#custom" class="vn-appbar__item">
+            <i class="ph ph-paint-brush vn-appbar__icon"></i>
+            <span class="vn-appbar__label" data-lang-vi="Đặt Hàng" data-lang-en="Order">Đặt Hàng</span>
+        </a>
+        <a href="#contact" class="vn-appbar__item">
+            <i class="ph ph-envelope vn-appbar__icon"></i>
+            <span class="vn-appbar__label" data-lang-vi="Liên Hệ" data-lang-en="Contact">Liên Hệ</span>
+        </a>
+    </nav>
+
+    <!-- Footer -->
+    <footer id="contact" class="vn-footer">
+        <div class="vn-footer__grid">
+            <div class="vn-footer__brand">
+                <div class="vn-footer__logo">
+                    <div class="vn-footer__logo-icon">VN</div>
+                    <span class="vn-footer__logo-text">Thủ Công Mỹ Nghệ Việt Nam</span>
+                </div>
+                <p class="vn-footer__description" data-lang-vi="Kết nối nghệ thuật truyền thống Việt Nam với thế giới hiện đại. Bảo tồn và phát huy giá trị văn hóa dân tộc." data-lang-en="Connecting traditional Vietnamese arts with the modern world. Preserving and promoting national cultural values.">Kết nối nghệ thuật truyền thống Việt Nam với thế giới hiện đại. Bảo tồn và phát huy giá trị văn hóa dân tộc.</p>
+            </div>
+
+            <div>
+                <h4 class="vn-footer__heading" data-lang-vi="Liên kết" data-lang-en="Quick Links">Liên kết</h4>
+                <ul class="vn-footer__links">
+                    <li><a href="#home" class="vn-footer__link" data-lang-vi="Trang chủ" data-lang-en="Home">Trang chủ</a></li>
+                    <li><a href="#products" class="vn-footer__link" data-lang-vi="Sản phẩm" data-lang-en="Products">Sản phẩm</a></li>
+                    <li><a href="#custom" class="vn-footer__link" data-lang-vi="Đặt yêu cầu" data-lang-en="Custom Order">Đặt yêu cầu</a></li>
+                    <li><a href="#artisans" class="vn-footer__link" data-lang-vi="Nghệ nhân" data-lang-en="Artisans">Nghệ nhân</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="vn-footer__heading" data-lang-vi="Tham khảo" data-lang-en="References">Tham khảo</h4>
+                <ul class="vn-footer__links">
+                    <li><a href="https://vietnam.travel/" target="_blank" rel="noopener" class="vn-footer__link">Vietnam Tourism</a></li>
+                    <li><a href="https://hoidisanvanhoa.vn/" target="_blank" rel="noopener" class="vn-footer__link">Hội Di Sản Văn Hóa</a></li>
+                    <li><a href="https://quydisan.vn/" target="_blank" rel="noopener" class="vn-footer__link">Quỹ Bảo Tồn Di Sản</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="vn-footer__heading" data-lang-vi="Kết nối" data-lang-en="Connect">Kết nối</h4>
+                <div class="vn-footer__social">
+                    <a href="#" class="vn-footer__social-link" aria-label="Facebook"><i class="ph ph-facebook-logo"></i></a>
+                    <a href="#" class="vn-footer__social-link" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+                    <a href="#" class="vn-footer__social-link" aria-label="YouTube"><i class="ph ph-youtube-logo"></i></a>
+                    <a href="#" class="vn-footer__social-link" aria-label="Pinterest"><i class="ph ph-pinterest-logo"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="vn-footer__bottom">
+            <p class="vn-footer__copyright">© 2026 Thủ Công Mỹ Nghệ Việt Nam. <span data-lang-vi="Mọi quyền được bảo lưu." data-lang-en="All rights reserved.">Mọi quyền được bảo lưu.</span></p>
+            <div class="vn-lang">
+                <button class="vn-lang__btn active" data-lang="vi">Tiếng Việt</button>
+                <button class="vn-lang__btn" data-lang="en">English</button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // ============================================
+        // LANGUAGE TOGGLE
+        // ============================================
+        let currentLang = 'vi';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-lang-vi], [data-lang-en]').forEach(el => {
+                const text = el.getAttribute(`data-lang-${lang}`);
+                if (text) el.textContent = text;
+            });
+
+            document.querySelectorAll('[data-lang-placeholder-vi], [data-lang-placeholder-en]').forEach(el => {
+                const placeholder = el.getAttribute(`data-lang-placeholder-${lang}`);
+                if (placeholder) el.placeholder = placeholder;
+            });
+
+            document.querySelectorAll('.vn-lang__btn').forEach(btn => {
+                const isActive = btn.getAttribute('data-lang') === lang;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-pressed', isActive);
+            });
+
+            document.documentElement.lang = lang;
+        }
+
+        document.querySelectorAll('[data-lang]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                if (lang && lang !== currentLang) switchLanguage(lang);
+            });
+        });
+
+        // ============================================
+        // BOUNCY ANIMATION
+        // ============================================
+        document.querySelectorAll('.vn-tile, .vn-product-card, .vn-person, .vn-featured, .vn-store__option, .vn-hub-action, .vn-quick-action').forEach(el => {
+            el.addEventListener('click', function(e) {
+                if (e.target.closest('button') || e.target.closest('a')) return;
+                this.style.animation = 'none';
+                this.offsetHeight;
+                this.style.animation = 'tile-bounce 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+            });
+            el.addEventListener('animationend', function() {
+                this.style.animation = '';
+            });
+        });
+
+        // ============================================
+        // STORE OPTION SELECTION
+        // ============================================
+        document.querySelectorAll('.vn-store__option').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.vn-store__option').forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+            });
+        });
+
+        // ============================================
+        // SCROLL ANIMATIONS
+        // ============================================
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.vn-animate').forEach(el => observer.observe(el));
+
+        // ============================================
+        // PIVOT NAVIGATION
+        // ============================================
+        const pivotTabs = document.querySelectorAll('.vn-pivot__tab');
+        const sections = document.querySelectorAll('section[id]');
+
+        function updatePivot() {
+            const scrollY = window.pageYOffset;
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 150;
+                const sectionHeight = section.offsetHeight;
+                const sectionId = section.getAttribute('id');
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    pivotTabs.forEach(tab => {
+                        tab.classList.remove('active');
+                        if (tab.getAttribute('href') === `#${sectionId}`) {
+                            tab.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }
+        window.addEventListener('scroll', updatePivot);
+
+        // ============================================
+        // SMOOTH SCROLL
+        // ============================================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.getBoundingClientRect().top + window.pageYOffset - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ============================================
+        // MOBILE MENU
+        // ============================================
+        const menuToggle = document.querySelector('.vn-menu-toggle');
+        const mobileMenu = document.querySelector('.vn-mobile-menu');
+
+        if (menuToggle) {
+            menuToggle.addEventListener('click', () => {
+                mobileMenu.classList.toggle('active');
+            });
+        }
+
+        document.querySelectorAll('.vn-mobile-menu__link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // ============================================
+        // HUB SEARCH
+        // ============================================
+        const hubSearch = document.querySelector('.vn-hub-search__input');
+        if (hubSearch) {
+            hubSearch.addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                document.querySelectorAll('.vn-person').forEach(person => {
+                    const name = person.querySelector('.vn-person__name')?.textContent.toLowerCase() || '';
+                    const craft = person.querySelector('.vn-person__craft span:last-child')?.textContent.toLowerCase() || '';
+                    person.style.display = (name.includes(query) || craft.includes(query)) ? 'flex' : 'none';
+                });
+            });
+        }
+
+        // ============================================
+        // FORM SUBMISSION
+        // ============================================
+        document.getElementById('customOrderForm')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert(currentLang === 'vi' ? 'Cảm ơn bạn! Yêu cầu đã được gửi thành công.' : 'Thank you! Your order request has been submitted successfully.');
+        });
+
+        // ============================================
+        // REDUCED MOTION
+        // ============================================
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.querySelectorAll('.vn-animate').forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+            });
+        }
+
+        console.log('Vietnamese Metro UI - Thủ Công Mỹ Nghệ Việt Nam');
+    </script>
+</body>
+</html>
