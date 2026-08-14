@@ -1903,6 +1903,342 @@
                 display: flex;
             }
         }
+
+        /* ============================================
+           PAYPAL-STYLE CONFIRMATION MODAL
+           ============================================ */
+        .vn-confirm-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(26, 26, 26, 0.9);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-lg);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .vn-confirm-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .vn-confirm-modal {
+            background: var(--metro-surface);
+            width: 100%;
+            max-width: 480px;
+            border-radius: 0;
+            overflow: hidden;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid var(--metro-border);
+            box-shadow: 0 25px 80px rgba(0,0,0,0.5);
+        }
+
+        .vn-confirm-overlay.active .vn-confirm-modal {
+            transform: scale(1) translateY(0);
+        }
+
+        /* Success Header */
+        .vn-confirm-header {
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-red-dark) 100%);
+            padding: var(--space-xl);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .vn-confirm-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(201,169,98,0.2) 0%, transparent 50%);
+        }
+
+        .vn-confirm-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+            animation: confirm-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both;
+        }
+
+        @keyframes confirm-pop {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .vn-confirm-icon i {
+            font-size: 40px;
+            color: var(--text-primary);
+        }
+
+        .vn-confirm-header h2 {
+            font-size: 24px;
+            font-weight: var(--font-semibold);
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+            position: relative;
+        }
+
+        .vn-confirm-header p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.8);
+            position: relative;
+        }
+
+        .vn-confirm-header .vn-confirm-id {
+            display: inline-block;
+            margin-top: var(--space-sm);
+            padding: 4px 12px;
+            background: rgba(0,0,0,0.2);
+            font-size: 12px;
+            font-weight: var(--font-semibold);
+            color: var(--vn-gold);
+            letter-spacing: 1px;
+        }
+
+        /* Order Details */
+        .vn-confirm-body {
+            padding: var(--space-lg);
+        }
+
+        .vn-confirm-section {
+            margin-bottom: var(--space-lg);
+        }
+
+        .vn-confirm-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .vn-confirm-section-title {
+            font-size: 12px;
+            font-weight: var(--font-semibold);
+            color: var(--vn-gold);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--metro-border);
+        }
+
+        /* Order Items */
+        .vn-confirm-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--metro-dark);
+            margin-bottom: var(--space-sm);
+        }
+
+        .vn-confirm-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .vn-confirm-item__icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-gold) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .vn-confirm-item__info {
+            flex: 1;
+        }
+
+        .vn-confirm-item__name {
+            font-size: 16px;
+            font-weight: var(--font-semibold);
+            margin-bottom: 4px;
+        }
+
+        .vn-confirm-item__details {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .vn-confirm-item__price {
+            font-size: 16px;
+            font-weight: var(--font-bold);
+            color: var(--vn-gold);
+        }
+
+        /* Info Grid */
+        .vn-confirm-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+
+        .vn-confirm-info-item {
+            padding: var(--space-md);
+            background: var(--metro-dark);
+        }
+
+        .vn-confirm-info-label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .vn-confirm-info-value {
+            font-size: 14px;
+            font-weight: var(--font-semibold);
+        }
+
+        /* Description Box */
+        .vn-confirm-description {
+            padding: var(--space-md);
+            background: var(--metro-dark);
+            border-left: 3px solid var(--vn-red);
+        }
+
+        .vn-confirm-description__label {
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-sm);
+        }
+
+        .vn-confirm-description__text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Total */
+        .vn-confirm-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md);
+            background: linear-gradient(135deg, rgba(184,56,59,0.1) 0%, rgba(201,169,98,0.1) 100%);
+            border: 1px solid var(--vn-red);
+            margin-top: var(--space-md);
+        }
+
+        .vn-confirm-total__label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .vn-confirm-total__value {
+            font-size: 20px;
+            font-weight: var(--font-bold);
+            color: var(--vn-gold);
+        }
+
+        .vn-confirm-total__note {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+            text-align: right;
+        }
+
+        /* Actions */
+        .vn-confirm-actions {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-lg);
+            padding-top: 0;
+        }
+
+        .vn-confirm-btn {
+            flex: 1;
+            padding: 14px 20px;
+            font-size: 15px;
+            font-weight: var(--font-semibold);
+            border: none;
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+        }
+
+        .vn-confirm-btn--primary {
+            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-red-dark) 100%);
+            color: var(--text-primary);
+        }
+
+        .vn-confirm-btn--primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(184,56,59,0.4);
+        }
+
+        .vn-confirm-btn--secondary {
+            background: var(--metro-dark);
+            color: var(--text-secondary);
+            border: 1px solid var(--metro-border);
+        }
+
+        .vn-confirm-btn--secondary:hover {
+            border-color: var(--vn-gold);
+            color: var(--vn-gold);
+        }
+
+        .vn-confirm-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* Footer Note */
+        .vn-confirm-footer {
+            padding: var(--space-md) var(--space-lg);
+            background: var(--metro-dark);
+            border-top: 1px solid var(--metro-border);
+            text-align: center;
+        }
+
+        .vn-confirm-footer p {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .vn-confirm-footer a {
+            color: var(--vn-gold);
+        }
+
+        .vn-confirm-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 480px) {
+            .vn-confirm-modal {
+                max-width: 100%;
+                margin: var(--space-md);
+            }
+
+            .vn-confirm-actions {
+                flex-direction: column;
+            }
+
+            .vn-confirm-info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -2649,6 +2985,264 @@
         }
 
         console.log('Vietnamese Metro UI - Thủ Công Mỹ Nghệ Việt Nam');
+
+        // ============================================
+        // PAYPAL-STYLE ORDER CONFIRMATION MODAL
+        // ============================================
+        const orderForm = document.getElementById('customOrderForm');
+        const confirmOverlay = document.querySelector('.vn-confirm-overlay');
+
+        // Generate order ID
+        function generateOrderId() {
+            const date = new Date();
+            const year = date.getFullYear().toString().slice(-2);
+            const month = (date.getMonth() + 1).toString().padStart(2, '0');
+            const day = date.getDate().toString().padStart(2, '0');
+            const random = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+            return `TCMN-${year}${month}${day}-${random}`;
+        }
+
+        // Format currency
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN').format(amount) + ' ₫';
+        }
+
+        // Get product display name
+        function getProductName(value, lang) {
+            const products = {
+                'oil': lang === 'vi' ? 'Tranh Sơn Dầu' : 'Oil Painting',
+                'lacquer': lang === 'vi' ? 'Tranh Sơn Mài' : 'Lacquer Painting',
+                'ceramic': lang === 'vi' ? 'Gốm Sứ' : 'Ceramic'
+            };
+            return products[value] || value;
+        }
+
+        // Get size display name
+        function getSizeName(value, lang) {
+            const sizes = {
+                'small': lang === 'vi' ? 'Nhỏ (30x40cm)' : 'Small (30x40cm)',
+                'medium': lang === 'vi' ? 'Vừa (50x70cm)' : 'Medium (50x70cm)',
+                'large': lang === 'vi' ? 'Lớn (80x100cm)' : 'Large (80x100cm)',
+                'custom': lang === 'vi' ? 'Tùy chỉnh' : 'Custom'
+            };
+            return sizes[value] || value;
+        }
+
+        // Get estimated price
+        function getEstimatedPrice(productType, size) {
+            const basePrices = {
+                'oil': 2500000,
+                'lacquer': 4000000,
+                'ceramic': 1500000
+            };
+            const sizeMultiplier = {
+                'small': 1,
+                'medium': 1.8,
+                'large': 2.8,
+                'custom': 2
+            };
+            return basePrices[productType] * sizeMultiplier[size];
+        }
+
+        // Get product icon
+        function getProductIcon(productType) {
+            const icons = {
+                'oil': 'ph-paint-brush',
+                'lacquer': 'ph-swatches',
+                'ceramic': 'ph-coffee'
+            };
+            return icons[productType] || 'ph-package';
+        }
+
+        // Show confirmation modal
+        function showOrderConfirmation(formData) {
+            const orderId = generateOrderId();
+            const lang = currentLang;
+
+            // Update modal content
+            document.querySelector('.vn-confirm-id').textContent = orderId;
+
+            // Order item
+            const itemName = document.querySelector('.vn-confirm-item__name');
+            itemName.textContent = getProductName(formData.productType, lang);
+
+            const itemDetails = document.querySelector('.vn-confirm-item__details');
+            itemDetails.innerHTML = `
+                <span><strong>${lang === 'vi' ? 'Kích thước' : 'Size'}:</strong> ${getSizeName(formData.size, lang)}</span>
+                <span><strong>${lang === 'vi' ? 'Ngày đặt' : 'Order date'}:</strong> ${new Date().toLocaleDateString(lang === 'vi' ? 'vi-VN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+                <span><strong>${lang === 'vi' ? 'Dự kiến hoàn thành' : 'Estimated completion'}:</strong> ${new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toLocaleDateString(lang === 'vi' ? 'vi-VN' : 'en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
+            `;
+
+            const itemPrice = document.querySelector('.vn-confirm-item__price');
+            itemPrice.textContent = formatCurrency(getEstimatedPrice(formData.productType, formData.size));
+
+            // Customer info
+            document.querySelector('.vn-confirm-info-value[data-field="name"]').textContent = formData.name;
+            document.querySelector('.vn-confirm-info-value[data-field="email"]').textContent = formData.email;
+            document.querySelector('.vn-confirm-info-value[data-field="phone"]').textContent = formData.phone;
+
+            // Description
+            document.querySelector('.vn-confirm-description__text').textContent = formData.description || (lang === 'vi' ? 'Không có' : 'None');
+
+            // Total
+            document.querySelector('.vn-confirm-total__value').textContent = formatCurrency(getEstimatedPrice(formData.productType, formData.size));
+
+            // Show modal
+            confirmOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal
+        function closeConfirmation() {
+            confirmOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            // Reset form
+            orderForm.reset();
+        }
+
+        // Form submission
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = {
+                name: this.querySelector('input[type="text"]').value,
+                phone: this.querySelector('input[type="tel"]').value,
+                email: this.querySelector('input[type="email"]').value,
+                productType: this.querySelector('select:nth-of-type(1)').value,
+                size: this.querySelector('select:nth-of-type(2)').value,
+                description: this.querySelector('textarea').value
+            };
+
+            showOrderConfirmation(formData);
+        });
+
+        // Close on overlay click
+        confirmOverlay.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeConfirmation();
+            }
+        });
+
+        // Close on button click
+        document.querySelectorAll('.vn-confirm-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.classList.contains('vn-confirm-btn--secondary')) {
+                    closeConfirmation();
+                } else {
+                    // Primary button - could navigate or print
+                    if (currentLang === 'vi') {
+                        alert('Cảm ơn bạn! Chúng tôi sẽ liên hệ trong 24 giờ tới.');
+                    } else {
+                        alert('Thank you! We will contact you within 24 hours.');
+                    }
+                    closeConfirmation();
+                }
+            });
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && confirmOverlay.classList.contains('active')) {
+                closeConfirmation();
+            }
+        });
     </script>
+
+    <!-- Order Confirmation Modal (PayPal Style) -->
+    <div class="vn-confirm-overlay">
+        <div class="vn-confirm-modal">
+            <!-- Header -->
+            <div class="vn-confirm-header">
+                <div class="vn-confirm-icon">
+                    <i class="ph ph-check-circle"></i>
+                </div>
+                <h2 data-lang-vi="Yêu Cầu Đặt Hàng Thành Công!" data-lang-en="Order Request Submitted!">Yêu Cầu Đặt Hàng Thành Công!</h2>
+                <p data-lang-vi="Cảm ơn bạn đã tin tưởng Thủ Công Mỹ Nghệ Việt Nam" data-lang-en="Thank you for trusting Vietnamese Artisan Crafts">Cảm ơn bạn đã tin tưởng Thủ Công Mỹ Nghệ Việt Nam</p>
+                <span class="vn-confirm-id">TCMN-260801-0001</span>
+            </div>
+
+            <!-- Body -->
+            <div class="vn-confirm-body">
+                <!-- Order Item -->
+                <div class="vn-confirm-section">
+                    <h3 class="vn-confirm-section-title" data-lang-vi="Sản phẩm đặt hàng" data-lang-en="Order Item">Sản phẩm đặt hàng</h3>
+                    <div class="vn-confirm-item">
+                        <div class="vn-confirm-item__icon">
+                            <i class="ph ph-paint-brush"></i>
+                        </div>
+                        <div class="vn-confirm-item__info">
+                            <h4 class="vn-confirm-item__name">Tranh Sơn Dầu</h4>
+                            <div class="vn-confirm-item__details">
+                                <span><strong>Kích thước:</strong> Vừa (50x70cm)</span>
+                                <span><strong>Ngày đặt:</strong> 01/08/2026</span>
+                                <span><strong>Dự kiến hoàn thành:</strong> 15/08/2026</span>
+                            </div>
+                        </div>
+                        <div class="vn-confirm-item__price">4.500.000 ₫</div>
+                    </div>
+                </div>
+
+                <!-- Customer Info -->
+                <div class="vn-confirm-section">
+                    <h3 class="vn-confirm-section-title" data-lang-vi="Thông tin khách hàng" data-lang-en="Customer Information">Thông tin khách hàng</h3>
+                    <div class="vn-confirm-info-grid">
+                        <div class="vn-confirm-info-item">
+                            <div class="vn-confirm-info-label" data-lang-vi="Họ và tên" data-lang-en="Full Name">Họ và tên</div>
+                            <div class="vn-confirm-info-value" data-field="name">Nguyễn Văn A</div>
+                        </div>
+                        <div class="vn-confirm-info-item">
+                            <div class="vn-confirm-info-label" data-lang-vi="Email" data-lang-en="Email">Email</div>
+                            <div class="vn-confirm-info-value" data-field="email">email@example.com</div>
+                        </div>
+                        <div class="vn-confirm-info-item">
+                            <div class="vn-confirm-info-label" data-lang-vi="Số điện thoại" data-lang-en="Phone">Số điện thoại</div>
+                            <div class="vn-confirm-info-value" data-field="phone">0901 234 567</div>
+                        </div>
+                        <div class="vn-confirm-info-item">
+                            <div class="vn-confirm-info-label" data-lang-vi="Mã đơn hàng" data-lang-en="Order ID">Mã đơn hàng</div>
+                            <div class="vn-confirm-info-value" data-field="orderId">TCMN-260801-0001</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="vn-confirm-section">
+                    <h3 class="vn-confirm-section-title" data-lang-vi="Mô tả yêu cầu" data-lang-en="Request Description">Mô tả yêu cầu</h3>
+                    <div class="vn-confirm-description">
+                        <div class="vn-confirm-description__label" data-lang-vi="Chi tiết ý tưởng" data-lang-en="Idea Details">Chi tiết ý tưởng</div>
+                        <p class="vn-confirm-description__text">Mô tả chi tiết về ý tưởng...</p>
+                    </div>
+                </div>
+
+                <!-- Total -->
+                <div class="vn-confirm-total">
+                    <div>
+                        <div class="vn-confirm-total__label" data-lang-vi="Tổng cộng (dự kiến)" data-lang-en="Total (estimated)">Tổng cộng (dự kiến)</div>
+                        <div class="vn-confirm-total__note" data-lang-vi="*Giá có thể thay đổi theo yêu cầu" data-lang-en="*Price may vary based on requirements">*Giá có thể thay đổi theo yêu cầu</div>
+                    </div>
+                    <div>
+                        <div class="vn-confirm-total__value">4.500.000 ₫</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="vn-confirm-actions">
+                <button class="vn-confirm-btn vn-confirm-btn--secondary">
+                    <i class="ph ph-x"></i>
+                    <span data-lang-vi="Đóng" data-lang-en="Close">Đóng</span>
+                </button>
+                <button class="vn-confirm-btn vn-confirm-btn--primary">
+                    <i class="ph ph-check"></i>
+                    <span data-lang-vi="Xác Nhận" data-lang-en="Confirm">Xác Nhận</span>
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="vn-confirm-footer">
+                <p data-lang-vi="Chúng tôi sẽ liên hệ bạn trong <strong>24 giờ</strong> để xác nhận chi tiết đơn hàng. Mọi thắc mắc xin liên hệ: <a href="tel:0901234567">0901 234 567</a>" data-lang-en="We will contact you within <strong>24 hours</strong> to confirm order details. For inquiries: <a href="tel:0901234567">0901 234 567</a>">Chúng tôi sẽ liên hệ bạn trong <strong>24 giờ</strong> để xác nhận chi tiết đơn hàng. Mọi thắc mắc xin liên hệ: <a href="tel:0901234567">0901 234 567</a></p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
