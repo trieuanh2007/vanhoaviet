@@ -2,7 +2,8 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Đã sửa: Chuẩn hóa viewport hỗ trợ trợ năng (WCAG) -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Website Quảng Bá Thủ Công Mỹ Nghệ - Văn Hoá Việt Nam. Kết nối nghệ thuật truyền thống với thế giới hiện đại.">
     <meta name="theme-color" content="#1A1A1A">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -141,21 +142,6 @@
         @keyframes confirm-pop {
             0% { transform: scale(0) rotate(-180deg); opacity: 0; }
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
-        }
-
-        @keyframes modal-fade-in {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes modal-slide-up {
-            from { transform: scale(0.85) translateY(40px); opacity: 0; }
-            to { transform: scale(1) translateY(0); opacity: 1; }
-        }
-
-        @keyframes shine-sweep {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
         }
 
         /* ============================================
@@ -379,6 +365,20 @@
         .vn-btn--gold:hover {
             box-shadow: 0 8px 30px rgba(201,169,98,0.4);
             transform: translateY(-3px) scale(1.02);
+        }
+
+        /* Đã bổ sung: Class .vn-btn--dark */
+        .vn-btn--dark {
+            background: var(--metro-surface);
+            color: var(--text-primary);
+            border: 2px solid var(--metro-border);
+        }
+
+        .vn-btn--dark:hover {
+            border-color: var(--vn-gold);
+            color: var(--vn-gold);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transform: translateY(-2px);
         }
 
         .vn-btn--outline {
@@ -921,7 +921,6 @@
             box-shadow: 0 0 0 3px rgba(201, 169, 98, 0.2);
         }
 
-        /* Validation states - 4.5:1 contrast */
         .vn-form__input.error {
             border-color: var(--vn-red);
             box-shadow: 0 0 0 3px rgba(184, 56, 59, 0.3);
@@ -948,12 +947,8 @@
             display: none;
         }
 
-        .vn-form__input.error + .vn-form__error {
+        .vn-form__input.error ~ .vn-form__error {
             display: block;
-        }
-
-        .vn-form__group {
-            margin-bottom: var(--space-lg);
         }
 
         .vn-form__row {
@@ -1028,27 +1023,6 @@
         .vn-hub-header__text span {
             font-size: 14px;
             opacity: 0.8;
-        }
-
-        .vn-hub-actions {
-            display: flex;
-            gap: var(--space-sm);
-        }
-
-        .vn-hub-action {
-            width: 44px;
-            height: 44px;
-            background: rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            transition: all var(--transition-fast);
-        }
-
-        .vn-hub-action:hover {
-            background: rgba(0,0,0,0.4);
-            transform: scale(1.1);
         }
 
         .vn-hub-search {
@@ -1190,11 +1164,7 @@
 
         .vn-quick-action--message {
             background: var(--vn-red);
-        }
-
-        .vn-quick-action--info {
-            background: var(--vn-gold);
-            color: var(--metro-dark);
+            color: var(--text-primary);
         }
 
         /* Featured */
@@ -1273,31 +1243,6 @@
         }
 
         /* ============================================
-           CTA SECTION
-           ============================================ */
-        .vn-cta {
-            background: linear-gradient(135deg, var(--vn-red) 0%, var(--vn-red-dark) 100%);
-            padding: var(--space-2xl) var(--space-lg);
-            text-align: center;
-        }
-
-        .vn-cta__title {
-            font-size: clamp(28px, 5vw, 42px);
-            font-weight: var(--font-light);
-            letter-spacing: -1px;
-            margin-bottom: var(--space-md);
-        }
-
-        .vn-cta__text {
-            font-size: 18px;
-            opacity: 0.9;
-            margin-bottom: var(--space-xl);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* ============================================
            BOTTOM APP BAR - WINDOWS PHONE 8 MODERN UI
            ============================================ */
         .vn-appbar {
@@ -1331,7 +1276,6 @@
             cursor: pointer;
         }
 
-        /* WP8 Modern UI Indicator - Top Pill */
         .vn-appbar__item::before {
             content: '';
             position: absolute;
@@ -1345,7 +1289,6 @@
             transition: transform 0.3s ease;
         }
 
-        /* Background highlight on hover */
         .vn-appbar__item::after {
             content: '';
             position: absolute;
@@ -1368,7 +1311,6 @@
             opacity: 1;
         }
 
-        /* Active State - WP8 Modern UI */
         .vn-appbar__item.active {
             color: var(--vn-gold);
         }
@@ -1456,6 +1398,7 @@
             display: flex;
             flex-direction: column;
             gap: var(--space-sm);
+            list-style: none;
         }
 
         .vn-footer__link {
@@ -1521,9 +1464,10 @@
         }
 
         /* ============================================
-           PAYPAL-STYLE CONFIRMATION MODAL
+           MODALS (CONFIRM & SUCCESS)
            ============================================ */
-        .vn-confirm-overlay {
+        .vn-confirm-overlay,
+        .vn-success-overlay {
             position: fixed;
             inset: 0;
             background: rgba(26, 26, 26, 0.85);
@@ -1536,15 +1480,17 @@
             padding: var(--space-lg);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s ease;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
-        .vn-confirm-overlay.active {
-            opacity: 1 !important;
-            visibility: visible !important;
+        .vn-confirm-overlay.active,
+        .vn-success-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .vn-confirm-modal {
+        .vn-confirm-modal,
+        .vn-success-modal {
             background: var(--metro-surface);
             width: 100%;
             max-width: 520px;
@@ -1556,7 +1502,8 @@
             box-shadow: 0 25px 80px rgba(0,0,0,0.6);
         }
 
-        .vn-confirm-overlay.active .vn-confirm-modal {
+        .vn-confirm-overlay.active .vn-confirm-modal,
+        .vn-success-overlay.active .vn-success-modal {
             transform: scale(1) translateY(0);
         }
 
@@ -1836,45 +1783,16 @@
             text-decoration: underline;
         }
 
-        /* ============================================
-           SUCCESS MODAL
-           ============================================ */
+        /* Success Modal Styles */
         .vn-success-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(26, 26, 26, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
             z-index: 3000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: var(--space-lg);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.4s ease;
-        }
-
-        .vn-success-overlay.active {
-            opacity: 1 !important;
-            visibility: visible !important;
         }
 
         .vn-success-modal {
-            background: var(--metro-surface);
-            width: 100%;
             max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-            transform: scale(0.8) translateY(50px);
-            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             border: 2px solid var(--vn-gold);
             box-shadow: 0 0 60px rgba(201, 169, 98, 0.3), 0 25px 80px rgba(0,0,0,0.6);
             text-align: center;
-        }
-
-        .vn-success-overlay.active .vn-success-modal {
-            transform: scale(1) translateY(0);
         }
 
         .vn-success-header {
@@ -1892,57 +1810,33 @@
         }
 
         .vn-success-icon {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             background: rgba(255,255,255,0.2);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto var(--space-lg);
-            animation: success-bounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
-        }
-
-        @keyframes success-bounce {
-            0% { transform: scale(0) rotate(-180deg); }
-            50% { transform: scale(1.2) rotate(10deg); }
-            70% { transform: scale(0.9) rotate(-5deg); }
-            100% { transform: scale(1) rotate(0deg); }
+            animation: confirm-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .vn-success-icon i {
-            font-size: 50px;
+            font-size: 40px;
             color: #fff;
-        }
-
-        .vn-success-icon::after {
-            content: '';
-            position: absolute;
-            inset: -10px;
-            border-radius: 50%;
-            border: 3px solid rgba(255,255,255,0.3);
-            animation: success-ripple 1.5s ease-out infinite;
-        }
-
-        @keyframes success-ripple {
-            0% { transform: scale(1); opacity: 1; }
-            100% { transform: scale(1.5); opacity: 0; }
         }
 
         .vn-success-header h2 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: var(--font-bold);
             color: #fff;
             margin-bottom: var(--space-sm);
-            position: relative;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
 
         .vn-success-header p {
-            font-size: 16px;
+            font-size: 15px;
             color: rgba(255,255,255,0.9);
-            position: relative;
         }
 
         .vn-success-body {
@@ -1952,19 +1846,18 @@
         .vn-success-order-info {
             background: var(--metro-dark);
             border: 1px solid var(--metro-border);
-            padding: var(--space-lg);
+            padding: var(--space-md);
             margin-bottom: var(--space-lg);
         }
 
         .vn-success-order-id {
-            font-size: 14px;
+            font-size: 13px;
             color: var(--text-secondary);
-            margin-bottom: var(--space-sm);
         }
 
         .vn-success-order-id strong {
             color: var(--vn-gold);
-            font-size: 18px;
+            font-size: 16px;
             display: block;
             margin-top: 4px;
         }
@@ -1972,7 +1865,7 @@
         .vn-success-summary {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: var(--space-md);
+            gap: var(--space-sm);
             margin-bottom: var(--space-lg);
         }
 
@@ -1980,10 +1873,11 @@
             background: var(--metro-dark);
             padding: var(--space-md);
             text-align: left;
+            border: 1px solid var(--metro-border);
         }
 
         .vn-success-summary-label {
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-muted);
             text-transform: uppercase;
             letter-spacing: 1px;
@@ -1991,8 +1885,9 @@
         }
 
         .vn-success-summary-value {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: var(--font-semibold);
+            word-break: break-word;
         }
 
         .vn-success-total {
@@ -2002,6 +1897,7 @@
             padding: var(--space-md);
             background: linear-gradient(135deg, rgba(184,56,59,0.15) 0%, rgba(201,169,98,0.1) 100%);
             border: 1px solid var(--vn-red);
+            margin-bottom: var(--space-lg);
         }
 
         .vn-success-total-label {
@@ -2010,7 +1906,7 @@
         }
 
         .vn-success-total-value {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: var(--font-bold);
             color: var(--vn-gold);
         }
@@ -2023,6 +1919,7 @@
             border-left: 3px solid var(--vn-gold);
             margin-bottom: var(--space-lg);
             text-align: left;
+            line-height: 1.5;
         }
 
         .vn-success-actions {
@@ -2032,8 +1929,8 @@
 
         .vn-success-btn {
             flex: 1;
-            padding: 16px 24px;
-            font-size: 16px;
+            padding: 14px 20px;
+            font-size: 15px;
             font-weight: var(--font-semibold);
             border: none;
             cursor: pointer;
@@ -2065,78 +1962,28 @@
             color: var(--vn-gold);
         }
 
-        .vn-success-btn:active {
-            transform: scale(0.98);
-        }
-
         /* ============================================
            RESPONSIVE
            ============================================ */
         @media (max-width: 1024px) {
-            .vn-products {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .vn-store__hero {
-                flex-direction: column;
-            }
-
-            .vn-store__hero-image {
-                width: 100%;
-                height: 200px;
-            }
-
-            .vn-store__screenshots-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .vn-store__options-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .vn-footer__grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .vn-products { grid-template-columns: repeat(2, 1fr); }
+            .vn-store__hero { flex-direction: column; }
+            .vn-store__hero-image { width: 100%; height: 200px; }
+            .vn-store__screenshots-grid { grid-template-columns: repeat(2, 1fr); }
+            .vn-store__options-grid { grid-template-columns: repeat(2, 1fr); }
+            .vn-footer__grid { grid-template-columns: repeat(2, 1fr); }
         }
 
         @media (max-width: 768px) {
-            .vn-header__title {
-                display: none;
-            }
-
-            .vn-products {
-                grid-template-columns: 1fr;
-            }
-
-            .vn-store__options-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .vn-form__row {
-                grid-template-columns: 1fr;
-            }
-
-            .vn-featured {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .vn-featured__stats {
-                justify-content: center;
-            }
-
-            .vn-featured__actions {
-                width: 100%;
-            }
-
-            .vn-featured__actions .vn-btn {
-                width: 100%;
-            }
-
-            .vn-person {
-                flex-wrap: wrap;
-            }
-
+            .vn-header__title { display: none; }
+            .vn-products { grid-template-columns: 1fr; }
+            .vn-store__options-grid { grid-template-columns: 1fr; }
+            .vn-form__row { grid-template-columns: 1fr; }
+            .vn-featured { flex-direction: column; text-align: center; }
+            .vn-featured__stats { justify-content: center; }
+            .vn-featured__actions { width: 100%; }
+            .vn-featured__actions .vn-btn { width: 100%; }
+            .vn-person { flex-wrap: wrap; }
             .vn-person__actions {
                 opacity: 1;
                 transform: translateX(0);
@@ -2144,40 +1991,15 @@
                 justify-content: center;
                 padding-top: var(--space-sm);
             }
-
-            .vn-footer__grid {
-                grid-template-columns: 1fr;
-            }
-
-            .vn-footer__bottom {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .vn-hero__actions {
-                flex-direction: column;
-            }
-
-            .vn-hero__actions .vn-btn {
-                width: 100%;
-            }
-
-            .vn-appbar__label {
-                display: none;
-            }
-
-            .vn-appbar__item {
-                padding: 10px 12px;
-                min-width: 60px;
-            }
-
-            .vn-confirm-actions {
-                flex-direction: column;
-            }
-
-            .vn-confirm-info-grid {
-                grid-template-columns: 1fr;
-            }
+            .vn-footer__grid { grid-template-columns: 1fr; }
+            .vn-footer__bottom { flex-direction: column; text-align: center; }
+            .vn-hero__actions { flex-direction: column; }
+            .vn-hero__actions .vn-btn { width: 100%; }
+            .vn-appbar__label { display: none; }
+            .vn-appbar__item { padding: 10px 12px; min-width: 60px; }
+            .vn-confirm-actions { flex-direction: column; }
+            .vn-confirm-info-grid,
+            .vn-success-summary { grid-template-columns: 1fr; }
         }
 
         /* ============================================
@@ -2188,11 +2010,7 @@
                 animation-duration: 0.01ms !important;
                 transition-duration: 0.01ms !important;
             }
-
-            .vn-animate {
-                opacity: 1;
-                transform: none;
-            }
+            .vn-animate { opacity: 1; transform: none; }
         }
     </style>
 </head>
@@ -2264,15 +2082,15 @@
                     <div class="vn-product-card__image-wrap">
                         <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&q=80" alt="Tranh Đông Hồ" class="vn-product-card__image" loading="lazy">
                         <div class="vn-product-card__overlay">
-                            <span class="vn-product-card__badge">Bán chạy</span>
+                            <span class="vn-product-card__badge" data-lang-vi="Bán chạy" data-lang-en="Best Seller">Bán chạy</span>
                         </div>
                     </div>
                     <div class="vn-product-card__info">
-                        <span class="vn-product-card__category">Tranh Đông Hồ</span>
-                        <h3 class="vn-product-card__name" data-lang-vi='Tranh Tết "Đám Hỏa Quan Âm"' data-lang-en='Tet Painting "Bodhidharma"'>Tranh Tết "Đám Hỏa Quan Âm"</h3>
+                        <span class="vn-product-card__category" data-lang-vi="Tranh Đông Hồ" data-lang-en="Dong Ho Painting">Tranh Đông Hồ</span>
+                        <h3 class="vn-product-card__name" data-lang-vi='Tranh Vinh Hoa Phú Quý' data-lang-en='Prosperity Folk Painting'>Tranh Vinh Hoa Phú Quý</h3>
                         <p class="vn-product-card__artisan">
                             <i class="ph ph-user"></i>
-                            <span data-lang-vi="Nguyễn Văn Minh" data-lang-en="Nguyen Van Minh">Nguyễn Văn Minh</span>
+                            <span>Nguyễn Văn Minh</span>
                         </p>
                     </div>
                     <div class="vn-product-card__actions">
@@ -2288,15 +2106,15 @@
                     <div class="vn-product-card__image-wrap">
                         <img src="https://images.unsplash.com/photo-1594631252845-29fc4cc8cde9?w=400&q=80" alt="Lụa Vạn Phúc" class="vn-product-card__image" loading="lazy">
                         <div class="vn-product-card__overlay">
-                            <span class="vn-product-card__badge" style="background:var(--vn-gold);color:var(--metro-dark);">Mới</span>
+                            <span class="vn-product-card__badge" style="background:var(--vn-gold);color:var(--metro-dark);" data-lang-vi="Mới" data-lang-en="New">Mới</span>
                         </div>
                     </div>
                     <div class="vn-product-card__info">
-                        <span class="vn-product-card__category">Lụa Vạn Phúc</span>
+                        <span class="vn-product-card__category" data-lang-vi="Lụa Vạn Phúc" data-lang-en="Van Phuc Silk">Lụa Vạn Phúc</span>
                         <h3 class="vn-product-card__name" data-lang-vi="Áo Dài Lụa Trắng Cổ Điển" data-lang-en="Classic White Silk Ao Dai">Áo Dài Lụa Trắng Cổ Điển</h3>
                         <p class="vn-product-card__artisan">
                             <i class="ph ph-user"></i>
-                            <span data-lang-vi="Trần Thị Lan" data-lang-en="Tran Thi Lan">Trần Thị Lan</span>
+                            <span>Trần Thị Lan</span>
                         </p>
                     </div>
                     <div class="vn-product-card__actions">
@@ -2314,11 +2132,11 @@
                         <div class="vn-product-card__overlay"></div>
                     </div>
                     <div class="vn-product-card__info">
-                        <span class="vn-product-card__category">Gốm Bát Tràng</span>
+                        <span class="vn-product-card__category" data-lang-vi="Gốm Bát Tràng" data-lang-en="Bat Trang Ceramic">Gốm Bát Tràng</span>
                         <h3 class="vn-product-card__name" data-lang-vi="Bình Hoa Gốm Men Trắng Xanh" data-lang-en="White Glaze Blue Vase">Bình Hoa Gốm Men Trắng Xanh</h3>
                         <p class="vn-product-card__artisan">
                             <i class="ph ph-user"></i>
-                            <span data-lang-vi="Lê Hồng Sơn" data-lang-en="Le Hong Son">Lê Hồng Sơn</span>
+                            <span>Lê Hồng Sơn</span>
                         </p>
                     </div>
                     <div class="vn-product-card__actions">
@@ -2338,11 +2156,11 @@
                         </div>
                     </div>
                     <div class="vn-product-card__info">
-                        <span class="vn-product-card__category">Nón Huế</span>
-                        <h3 class="vn-product-card__name" data-lang-vi="Nón Lá Guốc Đặc Biệt" data-lang-en="Special Conical Hat">Nón Lá Guốc Đặc Biệt</h3>
+                        <span class="vn-product-card__category" data-lang-vi="Nón Huế" data-lang-en="Hue Conical Hat">Nón Huế</span>
+                        <h3 class="vn-product-card__name" data-lang-vi="Nón Lá Bài Thơ Đặc Biệt" data-lang-en="Special Poem Conical Hat">Nón Lá Bài Thơ Đặc Biệt</h3>
                         <p class="vn-product-card__artisan">
                             <i class="ph ph-user"></i>
-                            <span data-lang-vi="Phạm Thị Hương" data-lang-en="Pham Thi Huong">Phạm Thị Hương</span>
+                            <span>Phạm Thị Hương</span>
                         </p>
                     </div>
                     <div class="vn-product-card__actions">
@@ -2381,7 +2199,7 @@
                                 <i class="ph-fill ph-star"></i>
                                 <i class="ph-fill ph-star-half"></i>
                             </div>
-                            <span class="vn-store__rating-text">4.8/5 (256 đánh giá)</span>
+                            <span class="vn-store__rating-text">4.8/5 (256 <span data-lang-vi="đánh giá" data-lang-en="reviews">đánh giá</span>)</span>
                         </div>
                         <div class="vn-store__price-badge">
                             <i class="ph ph-tag"></i>
@@ -2466,7 +2284,7 @@
                                 <i class="ph ph-paint-brush"></i>
                             </div>
                             <h4 class="vn-store__option-name" data-lang-vi="Tranh Sơn Dầu" data-lang-en="Oil Painting">Tranh Sơn Dầu</h4>
-                            <span class="vn-store__option-price">Từ 2.5M</span>
+                            <span class="vn-store__option-price" data-lang-vi="Từ 2.5M" data-lang-en="From 2.5M">Từ 2.5M</span>
                             <p class="vn-store__option-desc" data-lang-vi="Kích thước: 30x40cm - 100x120cm" data-lang-en="Size: 30x40cm - 100x120cm">Kích thước: 30x40cm - 100x120cm</p>
                         </div>
                         <div class="vn-store__option" data-product="lacquer">
@@ -2474,7 +2292,7 @@
                                 <i class="ph ph-swatches"></i>
                             </div>
                             <h4 class="vn-store__option-name" data-lang-vi="Tranh Sơn Mài" data-lang-en="Lacquer Painting">Tranh Sơn Mài</h4>
-                            <span class="vn-store__option-price">Từ 4.0M</span>
+                            <span class="vn-store__option-price" data-lang-vi="Từ 4.0M" data-lang-en="From 4.0M">Từ 4.0M</span>
                             <p class="vn-store__option-desc" data-lang-vi="Kích thước: 40x50cm - 80x100cm" data-lang-en="Size: 40x50cm - 80x100cm">Kích thước: 40x50cm - 80x100cm</p>
                         </div>
                         <div class="vn-store__option" data-product="ceramic">
@@ -2482,7 +2300,7 @@
                                 <i class="ph ph-coffee"></i>
                             </div>
                             <h4 class="vn-store__option-name" data-lang-vi="Gốm Sứ" data-lang-en="Ceramic">Gốm Sứ</h4>
-                            <span class="vn-store__option-price">Từ 1.5M</span>
+                            <span class="vn-store__option-price" data-lang-vi="Từ 1.5M" data-lang-en="From 1.5M">Từ 1.5M</span>
                             <p class="vn-store__option-desc" data-lang-vi="Bình, chén, đĩa trang trí" data-lang-en="Vases, cups, decorative plates">Bình, chén, đĩa trang trí</p>
                         </div>
                     </div>
@@ -2495,11 +2313,12 @@
                             <div class="vn-form__group">
                                 <label class="vn-form__label" data-lang-vi="Họ và tên" data-lang-en="Full Name">Họ và tên</label>
                                 <input type="text" class="vn-form__input" id="inputName" placeholder="Nguyễn Văn A" required data-lang-placeholder-vi="Nguyễn Văn A" data-lang-placeholder-en="Nguyen Van A" minlength="2" maxlength="50">
+                                <span class="vn-form__error" data-lang-vi="Vui lòng nhập họ và tên (tối thiểu 2 ký tự)" data-lang-en="Please enter your full name (min 2 characters)">Vui lòng nhập họ và tên (tối thiểu 2 ký tự)</span>
                             </div>
                             <div class="vn-form__group">
                                 <label class="vn-form__label" data-lang-vi="Số điện thoại" data-lang-en="Phone Number">Số điện thoại</label>
-                                <input type="tel" class="vn-form__input" id="inputPhone" placeholder="0901234567" required data-lang-placeholder-vi="0901234567" data-lang-placeholder-en="0901234567" pattern="[0-9]{9,11}" inputmode="numeric">
-                                <span class="vn-form__error" data-lang-vi="Vui lòng nhập số điện thoại hợp lệ (9-11 chữ số)" data-lang-en="Please enter a valid phone number (9-11 digits)">Vui lòng nhập số điện thoại hợp lệ (9-11 chữ số)</span>
+                                <input type="tel" class="vn-form__input" id="inputPhone" placeholder="0901234567" required data-lang-placeholder-vi="0901234567" data-lang-placeholder-en="0901234567" pattern="^(0[3|5|7|8|9])[0-9]{8}$" inputmode="numeric">
+                                <span class="vn-form__error" data-lang-vi="Vui lòng nhập SĐT Việt Nam hợp lệ (10 số, bắt đầu bằng 03, 05, 07, 08, 09)" data-lang-en="Please enter a valid VN phone number (10 digits starting with 03, 05, 07, 08, 09)">Vui lòng nhập SĐT Việt Nam hợp lệ (10 số, bắt đầu bằng 03, 05, 07, 08, 09)</span>
                             </div>
                         </div>
                         <div class="vn-form__group">
@@ -2520,7 +2339,7 @@
                                 <label class="vn-form__label" data-lang-vi="Kích thước mong muốn" data-lang-en="Desired Size">Kích thước mong muốn</label>
                                 <select class="vn-form__select" id="sizeSelect">
                                     <option value="small" data-lang-vi="Nhỏ (30x40cm)" data-lang-en="Small (30x40cm)">Nhỏ (30x40cm)</option>
-                                    <option value="medium" data-lang-vi="Vừa (50x70cm)" data-lang-en="Medium (50x70cm)">Vừa (50x70cm)</option>
+                                    <option value="medium" data-lang-vi="Vừa (50x70cm)" data-lang-en="Medium (50x70cm)" selected>Vừa (50x70cm)</option>
                                     <option value="large" data-lang-vi="Lớn (80x100cm)" data-lang-en="Large (80x100cm)">Lớn (80x100cm)</option>
                                     <option value="custom" data-lang-vi="Tùy chỉnh" data-lang-en="Custom">Tùy chỉnh</option>
                                 </select>
@@ -2556,7 +2375,7 @@
 
                 <div class="vn-hub-search">
                     <i class="ph ph-magnifying-glass vn-hub-search__icon"></i>
-                    <input type="text" class="vn-hub-search__input" placeholder="Tìm kiếm..." data-lang-placeholder-vi="Tìm kiếm..." data-lang-placeholder-en="Search...">
+                    <input type="text" class="vn-hub-search__input" placeholder="Tìm kiếm nghệ nhân, làng nghề..." data-lang-placeholder-vi="Tìm kiếm nghệ nhân, làng nghề..." data-lang-placeholder-en="Search artisans, craft villages...">
                 </div>
 
                 <div class="vn-featured">
@@ -2608,7 +2427,7 @@
                         </p>
                     </div>
                     <div class="vn-person__actions">
-                        <button class="vn-quick-action vn-quick-action--message"><i class="ph ph-chat-circle"></i></button>
+                        <button class="vn-quick-action vn-quick-action--message" aria-label="Nhắn tin"><i class="ph ph-chat-circle"></i></button>
                     </div>
                 </div>
 
@@ -2629,7 +2448,7 @@
                         </p>
                     </div>
                     <div class="vn-person__actions">
-                        <button class="vn-quick-action vn-quick-action--message"><i class="ph ph-chat-circle"></i></button>
+                        <button class="vn-quick-action vn-quick-action--message" aria-label="Nhắn tin"><i class="ph ph-chat-circle"></i></button>
                     </div>
                 </div>
 
@@ -2650,7 +2469,7 @@
                         </p>
                     </div>
                     <div class="vn-person__actions">
-                        <button class="vn-quick-action vn-quick-action--message"><i class="ph ph-chat-circle"></i></button>
+                        <button class="vn-quick-action vn-quick-action--message" aria-label="Nhắn tin"><i class="ph ph-chat-circle"></i></button>
                     </div>
                 </div>
             </div>
@@ -2706,9 +2525,9 @@
             <div>
                 <h4 class="vn-footer__heading" data-lang-vi="Kết nối" data-lang-en="Connect">Kết nối</h4>
                 <div class="vn-footer__social">
-                    <a href="#" class="vn-footer__social-link"><i class="ph ph-facebook-logo"></i></a>
-                    <a href="#" class="vn-footer__social-link"><i class="ph ph-instagram-logo"></i></a>
-                    <a href="#" class="vn-footer__social-link"><i class="ph ph-youtube-logo"></i></a>
+                    <a href="#" class="vn-footer__social-link" aria-label="Facebook"><i class="ph ph-facebook-logo"></i></a>
+                    <a href="#" class="vn-footer__social-link" aria-label="Instagram"><i class="ph ph-instagram-logo"></i></a>
+                    <a href="#" class="vn-footer__social-link" aria-label="YouTube"><i class="ph ph-youtube-logo"></i></a>
                 </div>
             </div>
         </div>
@@ -2765,7 +2584,8 @@
                         </div>
                         <div class="vn-confirm-info-item">
                             <div class="vn-confirm-info-label" data-lang-vi="Mã đơn hàng" data-lang-en="Order ID">Mã đơn hàng</div>
-                            <div class="vn-confirm-value" id="confirmOrderId">TCMN-260801-0001</div>
+                            <!-- Đã sửa: Class .vn-confirm-info-value -->
+                            <div class="vn-confirm-info-value" id="confirmOrderId">TCMN-260801-0001</div>
                         </div>
                     </div>
                 </div>
@@ -2804,431 +2624,7 @@
         </div>
     </div>
 
-    <script>
-        // ============================================
-        // LANGUAGE TOGGLE
-        // ============================================
-        let currentLang = 'vi';
-
-        function switchLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-lang-vi], [data-lang-en]').forEach(el => {
-                const text = el.getAttribute(`data-lang-${lang}`);
-                if (text) el.textContent = text;
-            });
-            document.querySelectorAll('[data-lang-placeholder-vi], [data-lang-placeholder-en]').forEach(el => {
-                const placeholder = el.getAttribute(`data-lang-placeholder-${lang}`);
-                if (placeholder) el.placeholder = placeholder;
-            });
-            document.querySelectorAll('.vn-lang__btn').forEach(btn => {
-                const isActive = btn.getAttribute('data-lang') === lang;
-                btn.classList.toggle('active', isActive);
-            });
-            document.documentElement.lang = lang;
-        }
-
-        document.querySelectorAll('[data-lang]').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const lang = btn.getAttribute('data-lang');
-                if (lang && lang !== currentLang) switchLanguage(lang);
-            });
-        });
-
-        // ============================================
-        // BOUNCY ANIMATIONS
-        // ============================================
-        document.querySelectorAll('.vn-product-card, .vn-person, .vn-featured, .vn-store__option, .vn-store__screenshot').forEach(el => {
-            el.addEventListener('click', function(e) {
-                if (e.target.closest('button') || e.target.closest('a')) return;
-                this.style.animation = 'none';
-                this.offsetHeight;
-                this.style.animation = 'tile-bounce 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
-            });
-        });
-
-        // ============================================
-        // STORE OPTION SELECTION
-        // ============================================
-        document.querySelectorAll('.vn-store__option').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.vn-store__option').forEach(o => o.classList.remove('selected'));
-                this.classList.add('selected');
-                const product = this.getAttribute('data-product');
-                const productSelect = document.getElementById('productSelect');
-                if (productSelect) productSelect.value = product;
-            });
-        });
-
-        // ============================================
-        // SCROLL ANIMATIONS
-        // ============================================
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.vn-animate').forEach(el => observer.observe(el));
-
-        // ============================================
-        // PIVOT & APP BAR - Active State Sync
-        // ============================================
-        const pivotTabs = document.querySelectorAll('.vn-pivot__tab');
-        const appBarItems = document.querySelectorAll('.vn-appbar__item');
-        const sections = document.querySelectorAll('section[id]');
-
-        function updateActiveNav() {
-            const scrollY = window.pageYOffset + 100;
-
-            let currentSection = null;
-            sections.forEach(section => {
-                const top = section.offsetTop;
-                const bottom = top + section.offsetHeight;
-                if (scrollY >= top && scrollY < bottom) {
-                    currentSection = section.getAttribute('id');
-                }
-            });
-
-            // Update pivot
-            pivotTabs.forEach(tab => {
-                tab.classList.toggle('active', tab.getAttribute('href') === `#${currentSection}`);
-            });
-
-            // Update app bar
-            appBarItems.forEach(item => {
-                item.classList.toggle('active', item.getAttribute('href') === `#${currentSection}`);
-            });
-        }
-
-        window.addEventListener('scroll', updateActiveNav);
-        window.addEventListener('load', updateActiveNav);
-
-        // ============================================
-        // SMOOTH SCROLL
-        // ============================================
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.getBoundingClientRect().top + window.pageYOffset - 70,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // ============================================
-        // HUB SEARCH
-        // ============================================
-        const hubSearch = document.querySelector('.vn-hub-search__input');
-        if (hubSearch) {
-            hubSearch.addEventListener('input', function() {
-                const query = this.value.toLowerCase();
-                document.querySelectorAll('.vn-person').forEach(person => {
-                    const name = person.querySelector('.vn-person__name')?.textContent.toLowerCase() || '';
-                    const craft = person.querySelector('.vn-person__craft span:last-child')?.textContent.toLowerCase() || '';
-                    person.style.display = (name.includes(query) || craft.includes(query)) ? 'flex' : 'none';
-                });
-            });
-        }
-
-        // ============================================
-        // ORDER CONFIRMATION MODAL
-        // ============================================
-        const orderForm = document.getElementById('customOrderForm');
-        const confirmOverlay = document.getElementById('confirmOverlay');
-
-        // Form input references (must be before showConfirmation)
-        const inputPhone = document.getElementById('inputPhone');
-        const inputEmail = document.getElementById('inputEmail');
-        const inputName = document.getElementById('inputName');
-
-        function generateOrderId() {
-            const date = new Date();
-            const y = date.getFullYear().toString().slice(-2);
-            const m = (date.getMonth() + 1).toString().padStart(2, '0');
-            const d = date.getDate().toString().padStart(2, '0');
-            const r = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
-            return `TCMN-${y}${m}${d}-${r}`;
-        }
-
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('vi-VN').format(amount) + ' ₫';
-        }
-
-        function getProductName(value, lang) {
-            const products = {
-                'oil': lang === 'vi' ? 'Tranh Sơn Dầu' : 'Oil Painting',
-                'lacquer': lang === 'vi' ? 'Tranh Sơn Mài' : 'Lacquer Painting',
-                'ceramic': lang === 'vi' ? 'Gốm Sứ' : 'Ceramic'
-            };
-            return products[value] || value;
-        }
-
-        function getSizeName(value, lang) {
-            const sizes = {
-                'small': lang === 'vi' ? 'Nhỏ (30x40cm)' : 'Small (30x40cm)',
-                'medium': lang === 'vi' ? 'Vừa (50x70cm)' : 'Medium (50x70cm)',
-                'large': lang === 'vi' ? 'Lớn (80x100cm)' : 'Large (80x100cm)',
-                'custom': lang === 'vi' ? 'Tùy chỉnh' : 'Custom'
-            };
-            return sizes[value] || value;
-        }
-
-        function getEstimatedPrice(productType, size) {
-            const base = { 'oil': 2500000, 'lacquer': 4000000, 'ceramic': 1500000 };
-            const mult = { 'small': 1, 'medium': 1.8, 'large': 2.8, 'custom': 2 };
-            return base[productType] * mult[size];
-        }
-
-        function showConfirmation(formData) {
-            console.log('showConfirmation called');
-            const orderId = generateOrderId();
-            const lang = currentLang;
-            const today = new Date();
-            const completeDate = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
-
-            const dateFormat = { year: 'numeric', month: 'long', day: 'numeric' };
-            const orderDateStr = today.toLocaleDateString(lang === 'vi' ? 'vi-VN' : 'en-US', dateFormat);
-            const completeDateStr = completeDate.toLocaleDateString(lang === 'vi' ? 'vi-VN' : 'en-US', dateFormat);
-            const price = getEstimatedPrice(formData.productType, formData.size);
-
-            // Populate modal
-            document.getElementById('orderIdDisplay').textContent = orderId;
-            document.getElementById('confirmOrderId').textContent = orderId;
-            document.getElementById('confirmItemName').textContent = getProductName(formData.productType, lang);
-            document.getElementById('confirmItemSize').textContent = getSizeName(formData.size, lang);
-            document.getElementById('confirmOrderDate').textContent = orderDateStr;
-            document.getElementById('confirmCompleteDate').textContent = completeDateStr;
-            document.getElementById('confirmItemPrice').textContent = formatCurrency(price);
-            document.getElementById('confirmTotal').textContent = formatCurrency(price);
-            document.getElementById('confirmName').textContent = formData.name;
-            document.getElementById('confirmEmail').textContent = formData.email;
-            document.getElementById('confirmPhone').textContent = formData.phone;
-            document.getElementById('confirmDescription').textContent = formData.description || (lang === 'vi' ? 'Không có' : 'None');
-
-            // Show modal - use inline style to ensure visibility
-            confirmOverlay.style.opacity = '1';
-            confirmOverlay.style.visibility = 'visible';
-            confirmOverlay.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeConfirmation() {
-            confirmOverlay.classList.remove('active');
-            confirmOverlay.style.opacity = '0';
-            confirmOverlay.style.visibility = 'hidden';
-            confirmOverlay.style.display = 'none';
-            document.body.style.overflow = '';
-            orderForm.reset();
-            // Clear error states
-            document.querySelectorAll('.vn-form__input').forEach(input => {
-                input.classList.remove('error', 'success');
-            });
-        }
-
-        // ============================================
-        // FORM VALIDATION
-        // ============================================
-        // Phone: Only allow digits (0-9)
-        inputPhone.addEventListener('input', function(e) {
-            // Remove non-numeric characters
-            this.value = this.value.replace(/[^0-9]/g, '');
-            // Validate on input
-            validatePhone(this);
-        });
-
-        // Email: Real-time validation
-        inputEmail.addEventListener('blur', function() {
-            validateEmail(this);
-        });
-        inputEmail.addEventListener('input', function() {
-            // Remove error class while typing
-            this.classList.remove('error');
-        });
-
-        // Name: Real-time validation
-        inputName.addEventListener('blur', function() {
-            validateName(this);
-        });
-
-        function validatePhone(input) {
-            const digitsOnly = input.value.replace(/[^0-9]/g, '');
-            const isValid = /^[0-9]{9,11}$/.test(digitsOnly);
-            updateValidationState(input, isValid && digitsOnly.length > 0);
-            return isValid;
-        }
-
-        function validateEmail(input) {
-            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value);
-            updateValidationState(input, isValid && input.value.length > 0);
-            return isValid;
-        }
-
-        function validateName(input) {
-            const isValid = input.value.trim().length >= 2;
-            updateValidationState(input, isValid);
-            return isValid;
-        }
-
-        function updateValidationState(input, isValid) {
-            if (input.value.length === 0) {
-                input.classList.remove('error', 'success');
-            } else if (isValid) {
-                input.classList.remove('error');
-                input.classList.add('success');
-            } else {
-                input.classList.remove('success');
-                input.classList.add('error');
-            }
-        }
-
-        orderForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            console.log('Form submitted!', {
-                name: inputName.value,
-                phone: inputPhone.value,
-                email: inputEmail.value
-            });
-
-            // Validate all fields
-            const nameValid = validateName(inputName);
-            const phoneValid = validatePhone(inputPhone);
-            const emailValid = validateEmail(inputEmail);
-
-            console.log('Validation:', { nameValid, phoneValid, emailValid });
-
-            // Focus first invalid field
-            if (!nameValid) {
-                console.log('Name invalid');
-                inputName.focus();
-                return;
-            }
-            if (!phoneValid) {
-                console.log('Phone invalid');
-                inputPhone.focus();
-                return;
-            }
-            if (!emailValid) {
-                console.log('Email invalid');
-                inputEmail.focus();
-                return;
-            }
-
-            // All valid - gather form data
-            const formData = {
-                name: inputName.value.trim(),
-                phone: inputPhone.value,
-                email: inputEmail.value.trim(),
-                productType: document.getElementById('productSelect').value,
-                size: document.getElementById('sizeSelect').value,
-                description: document.getElementById('inputDescription').value.trim()
-            };
-
-            console.log('Showing confirmation modal...');
-            showConfirmation(formData);
-        });
-
-        document.getElementById('confirmCloseBtn').addEventListener('click', closeConfirmation);
-        // confirmOkBtn handled by the code below that shows success modal
-
-        confirmOverlay.addEventListener('click', function(e) {
-            if (e.target === this) closeConfirmation();
-        });
-
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && confirmOverlay.classList.contains('active')) {
-                closeConfirmation();
-            }
-        });
-
-        // ============================================
-        // REDUCED MOTION
-        // ============================================
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            document.querySelectorAll('.vn-animate').forEach(el => {
-                el.style.opacity = '1';
-                el.style.transform = 'none';
-            });
-        }
-
-        // ============================================
-        // SUCCESS MODAL
-        // ============================================
-        const successOverlay = document.getElementById('successOverlay');
-        const successOkBtn = document.getElementById('successOkBtn');
-        const successNewBtn = document.getElementById('successNewBtn');
-
-        function showSuccessModal(orderId, formData, price) {
-            console.log('showSuccessModal called!');
-            document.getElementById('successOrderId').textContent = orderId;
-            document.getElementById('successName').textContent = formData.name;
-            document.getElementById('successEmail').textContent = formData.email;
-            document.getElementById('successPhone').textContent = formData.phone;
-            document.getElementById('successProduct').textContent = getProductName(formData.productType, currentLang) + ' - ' + getSizeName(formData.size, currentLang);
-            document.getElementById('successTotal').textContent = formatCurrency(price);
-
-            // Show modal - use inline style to ensure visibility
-            successOverlay.style.opacity = '1';
-            successOverlay.style.visibility = 'visible';
-            successOverlay.style.display = 'flex';
-        }
-
-        function closeSuccessModal() {
-            successOverlay.classList.remove('active');
-            closeConfirmation();
-            orderForm.reset();
-            document.querySelectorAll('.vn-form__input').forEach(input => {
-                input.classList.remove('error', 'success');
-            });
-        }
-
-        successOkBtn.addEventListener('click', function() {
-            closeSuccessModal();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        successNewBtn.addEventListener('click', function() {
-            closeSuccessModal();
-        });
-
-        successOverlay.addEventListener('click', function(e) {
-            if (e.target === this) closeSuccessModal();
-        });
-
-        // Update confirm OK button to show success modal
-        document.getElementById('confirmOkBtn').addEventListener('click', function() {
-            console.log('Confirm button clicked!');
-            const orderId = document.getElementById('confirmOrderId').textContent;
-            const price = getEstimatedPrice(
-                document.getElementById('productSelect').value,
-                document.getElementById('sizeSelect').value
-            );
-            const formData = {
-                name: document.getElementById('confirmName').textContent,
-                email: document.getElementById('confirmEmail').textContent,
-                phone: document.getElementById('confirmPhone').textContent,
-                productType: document.getElementById('productSelect').value,
-                size: document.getElementById('sizeSelect').value
-            };
-
-            console.log('Order ID:', orderId);
-            console.log('Price:', price);
-            console.log('Form Data:', formData);
-
-            closeConfirmation();
-            setTimeout(() => {
-                console.log('Showing success modal...');
-                showSuccessModal(orderId, formData, price);
-            }, 300);
-        });
-    </script>
-
-    <!-- Success Confirmation Modal -->
+    <!-- Success Confirmation Modal (Đã chuyển lên trước thẻ script) -->
     <div class="vn-success-overlay" id="successOverlay">
         <div class="vn-success-modal">
             <div class="vn-success-header">
@@ -3286,5 +2682,368 @@
             </div>
         </div>
     </div>
+
+    <!-- SCRIPT ĐÃ ĐƯỢC TỐI ƯU & DEBUG TOÀN BỘ -->
+    <script>
+        // ============================================
+        // 1. LANGUAGE TOGGLE (Đã sửa lỗi innerHTML & Tags)
+        // ============================================
+        let currentLang = 'vi';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            document.querySelectorAll('[data-lang-vi], [data-lang-en]').forEach(el => {
+                const text = el.getAttribute(`data-lang-${lang}`);
+                if (text) {
+                    if (text.includes('<') && text.includes('>')) {
+                        el.innerHTML = text;
+                    } else {
+                        el.textContent = text;
+                    }
+                }
+            });
+            document.querySelectorAll('[data-lang-placeholder-vi], [data-lang-placeholder-en]').forEach(el => {
+                const placeholder = el.getAttribute(`data-lang-placeholder-${lang}`);
+                if (placeholder) el.placeholder = placeholder;
+            });
+            document.querySelectorAll('.vn-lang__btn').forEach(btn => {
+                const isActive = btn.getAttribute('data-lang') === lang;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            });
+            document.documentElement.lang = lang;
+        }
+
+        document.querySelectorAll('[data-lang]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.getAttribute('data-lang');
+                if (lang && lang !== currentLang) switchLanguage(lang);
+            });
+        });
+
+        // ============================================
+        // 2. BOUNCY ANIMATIONS
+        // ============================================
+        document.querySelectorAll('.vn-product-card, .vn-person, .vn-featured, .vn-store__option, .vn-store__screenshot').forEach(el => {
+            el.addEventListener('click', function(e) {
+                if (e.target.closest('button') || e.target.closest('a')) return;
+                this.style.animation = 'none';
+                this.offsetHeight;
+                this.style.animation = 'tile-bounce 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+            });
+        });
+
+        // ============================================
+        // 3. STORE OPTION 2-WAY SYNC (Đồng bộ 2 chiều)
+        // ============================================
+        const productSelect = document.getElementById('productSelect');
+        const storeOptions = document.querySelectorAll('.vn-store__option');
+
+        storeOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                storeOptions.forEach(o => o.classList.remove('selected'));
+                this.classList.add('selected');
+                const product = this.getAttribute('data-product');
+                if (productSelect) productSelect.value = product;
+            });
+        });
+
+        if (productSelect) {
+            productSelect.addEventListener('change', function() {
+                storeOptions.forEach(opt => {
+                    opt.classList.toggle('selected', opt.getAttribute('data-product') === this.value);
+                });
+            });
+        }
+
+        // ============================================
+        // 4. SCROLL ANIMATIONS & NAV SYNC
+        // ============================================
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.vn-animate').forEach(el => observer.observe(el));
+
+        const pivotTabs = document.querySelectorAll('.vn-pivot__tab');
+        const appBarItems = document.querySelectorAll('.vn-appbar__item');
+        const sections = document.querySelectorAll('section[id]');
+
+        function updateActiveNav() {
+            const scrollY = window.scrollY + 100;
+            let currentSection = null;
+
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                if (scrollY >= top && scrollY < bottom) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            pivotTabs.forEach(tab => {
+                tab.classList.toggle('active', tab.getAttribute('href') === `#${currentSection}`);
+            });
+
+            appBarItems.forEach(item => {
+                item.classList.toggle('active', item.getAttribute('href') === `#${currentSection}`);
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+        window.addEventListener('load', updateActiveNav);
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    window.scrollTo({
+                        top: target.getBoundingClientRect().top + window.scrollY - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // ============================================
+        // 5. HUB SEARCH
+        // ============================================
+        const hubSearch = document.querySelector('.vn-hub-search__input');
+        if (hubSearch) {
+            hubSearch.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                document.querySelectorAll('.vn-person').forEach(person => {
+                    const name = person.querySelector('.vn-person__name')?.textContent.toLowerCase() || '';
+                    const craft = person.querySelector('.vn-person__craft span:last-child')?.textContent.toLowerCase() || '';
+                    person.style.display = (name.includes(query) || craft.includes(query)) ? 'flex' : 'none';
+                });
+            });
+        }
+
+        // ============================================
+        // 6. VALIDATION & ORDER SYSTEM
+        // ============================================
+        const orderForm = document.getElementById('customOrderForm');
+        const confirmOverlay = document.getElementById('confirmOverlay');
+        const successOverlay = document.getElementById('successOverlay');
+        const inputName = document.getElementById('inputName');
+        const inputPhone = document.getElementById('inputPhone');
+        const inputEmail = document.getElementById('inputEmail');
+
+        function generateOrderId() {
+            const date = new Date();
+            const y = date.getFullYear().toString().slice(-2);
+            const m = (date.getMonth() + 1).toString().padStart(2, '0');
+            const d = date.getDate().toString().padStart(2, '0');
+            const r = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+            return `TCMN-${y}${m}${d}-${r}`;
+        }
+
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('vi-VN').format(amount) + ' ₫';
+        }
+
+        function getProductName(value, lang) {
+            const products = {
+                'oil': lang === 'vi' ? 'Tranh Sơn Dầu' : 'Oil Painting',
+                'lacquer': lang === 'vi' ? 'Tranh Sơn Mài' : 'Lacquer Painting',
+                'ceramic': lang === 'vi' ? 'Gốm Sứ' : 'Ceramic'
+            };
+            return products[value] || value;
+        }
+
+        function getSizeName(value, lang) {
+            const sizes = {
+                'small': lang === 'vi' ? 'Nhỏ (30x40cm)' : 'Small (30x40cm)',
+                'medium': lang === 'vi' ? 'Vừa (50x70cm)' : 'Medium (50x70cm)',
+                'large': lang === 'vi' ? 'Lớn (80x100cm)' : 'Large (80x100cm)',
+                'custom': lang === 'vi' ? 'Tùy chỉnh' : 'Custom'
+            };
+            return sizes[value] || value;
+        }
+
+        function getEstimatedPrice(productType, size) {
+            const base = { 'oil': 2500000, 'lacquer': 4000000, 'ceramic': 1500000 };
+            const mult = { 'small': 1, 'medium': 1.8, 'large': 2.8, 'custom': 2 };
+            return (base[productType] || 2000000) * (mult[size] || 1);
+        }
+
+        function updateValidationState(input, isValid) {
+            if (input.value.trim().length === 0) {
+                input.classList.remove('error', 'success');
+            } else if (isValid) {
+                input.classList.remove('error');
+                input.classList.add('success');
+            } else {
+                input.classList.remove('success');
+                input.classList.add('error');
+            }
+        }
+
+        function validateName(input) {
+            const isValid = input.value.trim().length >= 2;
+            updateValidationState(input, isValid);
+            return isValid;
+        }
+
+        function validatePhone(input) {
+            const digitsOnly = input.value.replace(/[^0-9]/g, '');
+            // Chuẩn SĐT Việt Nam: 10 chữ số, đầu 03, 05, 07, 08, 09
+            const isValid = /^(0[3|5|7|8|9])[0-9]{8}$/.test(digitsOnly);
+            updateValidationState(input, isValid && digitsOnly.length > 0);
+            return isValid;
+        }
+
+        function validateEmail(input) {
+            const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input.value.trim());
+            updateValidationState(input, isValid && input.value.trim().length > 0);
+            return isValid;
+        }
+
+        inputPhone.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9]/g, '');
+            validatePhone(this);
+        });
+
+        inputEmail.addEventListener('blur', function() { validateEmail(this); });
+        inputName.addEventListener('blur', function() { validateName(this); });
+
+        // Hiện popup xác nhận
+        function showConfirmation(formData) {
+            const orderId = generateOrderId();
+            const lang = currentLang;
+            const today = new Date();
+            const completeDate = new Date(today.getTime() + 14 * 24 * 60 * 60 * 1000);
+
+            const dateFormat = { year: 'numeric', month: 'numeric', day: 'numeric' };
+            const orderDateStr = today.toLocaleDateString(lang === 'vi' ? 'vi-VN' : 'en-US', dateFormat);
+            const completeDateStr = completeDate.toLocaleDateString(lang === 'vi' ? 'vi-VN' : 'en-US', dateFormat);
+            const price = getEstimatedPrice(formData.productType, formData.size);
+
+            document.getElementById('orderIdDisplay').textContent = orderId;
+            document.getElementById('confirmOrderId').textContent = orderId;
+            document.getElementById('confirmItemName').textContent = getProductName(formData.productType, lang);
+            document.getElementById('confirmItemSize').textContent = getSizeName(formData.size, lang);
+            document.getElementById('confirmOrderDate').textContent = orderDateStr;
+            document.getElementById('confirmCompleteDate').textContent = completeDateStr;
+            document.getElementById('confirmItemPrice').textContent = formatCurrency(price);
+            document.getElementById('confirmTotal').textContent = formatCurrency(price);
+            document.getElementById('confirmName').textContent = formData.name;
+            document.getElementById('confirmEmail').textContent = formData.email;
+            document.getElementById('confirmPhone').textContent = formData.phone;
+            document.getElementById('confirmDescription').textContent = formData.description || (lang === 'vi' ? 'Không có' : 'None');
+
+            confirmOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeConfirmation() {
+            confirmOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        orderForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const nameValid = validateName(inputName);
+            const phoneValid = validatePhone(inputPhone);
+            const emailValid = validateEmail(inputEmail);
+
+            if (!nameValid) { inputName.focus(); return; }
+            if (!phoneValid) { inputPhone.focus(); return; }
+            if (!emailValid) { inputEmail.focus(); return; }
+
+            const formData = {
+                name: inputName.value.trim(),
+                phone: inputPhone.value.trim(),
+                email: inputEmail.value.trim(),
+                productType: document.getElementById('productSelect').value,
+                size: document.getElementById('sizeSelect').value,
+                description: document.getElementById('inputDescription').value.trim()
+            };
+
+            showConfirmation(formData);
+        });
+
+        document.getElementById('confirmCloseBtn').addEventListener('click', closeConfirmation);
+
+        confirmOverlay.addEventListener('click', function(e) {
+            if (e.target === this) closeConfirmation();
+        });
+
+        // ============================================
+        // 7. SUCCESS MODAL & ESCAPE LISTENER
+        // ============================================
+        function showSuccessModal(orderId, formData, price) {
+            document.getElementById('successOrderId').textContent = orderId;
+            document.getElementById('successName').textContent = formData.name;
+            document.getElementById('successEmail').textContent = formData.email;
+            document.getElementById('successPhone').textContent = formData.phone;
+            document.getElementById('successProduct').textContent = getProductName(formData.productType, currentLang) + ' - ' + getSizeName(formData.size, currentLang);
+            document.getElementById('successTotal').textContent = formatCurrency(price);
+
+            successOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSuccessModal() {
+            successOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+            orderForm.reset();
+            document.querySelectorAll('.vn-form__input').forEach(input => {
+                input.classList.remove('error', 'success');
+            });
+            // Reset active store option
+            storeOptions.forEach(opt => {
+                opt.classList.toggle('selected', opt.getAttribute('data-product') === 'oil');
+            });
+        }
+
+        document.getElementById('confirmOkBtn').addEventListener('click', function() {
+            const orderId = document.getElementById('confirmOrderId').textContent;
+            const price = getEstimatedPrice(
+                document.getElementById('productSelect').value,
+                document.getElementById('sizeSelect').value
+            );
+            const formData = {
+                name: document.getElementById('confirmName').textContent,
+                email: document.getElementById('confirmEmail').textContent,
+                phone: document.getElementById('confirmPhone').textContent,
+                productType: document.getElementById('productSelect').value,
+                size: document.getElementById('sizeSelect').value
+            };
+
+            closeConfirmation();
+            setTimeout(() => {
+                showSuccessModal(orderId, formData, price);
+            }, 300);
+        });
+
+        document.getElementById('successOkBtn').addEventListener('click', function() {
+            closeSuccessModal();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        document.getElementById('successNewBtn').addEventListener('click', closeSuccessModal);
+
+        successOverlay.addEventListener('click', function(e) {
+            if (e.target === this) closeSuccessModal();
+        });
+
+        // Hỗ trợ phím ESC đóng modal mượt mà
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                if (confirmOverlay.classList.contains('active')) closeConfirmation();
+                if (successOverlay.classList.contains('active')) closeSuccessModal();
+            }
+        });
+    </script>
 </body>
 </html>
